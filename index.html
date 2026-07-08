@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="DingCat OS：陈雪婷的个人空间，一个蓝黄白手绘风个人网站中保真原型。"
+    />
+    <title>DingCat OS | 陈雪婷的个人空间</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="system-bar" aria-label="DingCat OS 系统状态栏">
+      <a class="brand system-brand" href="#welcome" aria-label="回到欢迎页">
+        <span class="brand-mark">DC</span>
+        <span>
+          <strong>DingCat OS</strong>
+          <small>陈雪婷的个人空间</small>
+        </span>
+      </a>
+      <div class="system-menu" aria-hidden="true">
+        <span>系统</span>
+        <span>文件</span>
+        <span>编辑</span>
+        <span>视图</span>
+        <span>窗口</span>
+        <span>帮助</span>
+      </div>
+      <div class="system-status" aria-label="系统状态">
+        <span>24°C 晴</span>
+        <span>Wi-Fi</span>
+        <span>音量</span>
+        <span>100%</span>
+        <span id="systemTime">10:30</span>
+      </div>
+    </header>
+
+    <nav class="dock-nav" aria-label="DingCat OS Dock 导航">
+      <a href="#welcome" class="nav-item active" data-nav="welcome">
+        <span class="dock-icon dock-home" aria-hidden="true"></span>
+        <small>Welcome</small>
+      </a>
+      <a href="#experience" class="nav-item" data-nav="experience">
+        <span class="dock-icon dock-about" aria-hidden="true"></span>
+        <small>About</small>
+      </a>
+      <a href="#workflow" class="nav-item" data-nav="workflow">
+        <span class="dock-icon dock-ai" aria-hidden="true"></span>
+        <small>AI Workflow</small>
+      </a>
+      <a href="#projects" class="nav-item" data-nav="projects">
+        <span class="dock-icon dock-projects" aria-hidden="true"></span>
+        <small>Projects</small>
+      </a>
+      <a href="#life" class="nav-item" data-nav="life">
+        <span class="dock-icon dock-life" aria-hidden="true"></span>
+        <small>Life Lab</small>
+      </a>
+      <a href="#contact" class="nav-item" data-nav="contact">
+        <span class="dock-icon dock-contact" aria-hidden="true"></span>
+        <small>Contact</small>
+      </a>
+    </nav>
+
+    <main class="page-flow">
+      <section id="welcome" class="screen welcome-screen" aria-labelledby="welcome-title">
+        <div class="welcome-center">
+          <div class="title-field">
+            <canvas id="particleText" aria-hidden="true"></canvas>
+            <h1 id="welcome-title">欢迎进入 DingCat OS</h1>
+            <span class="particle-dot dot-a"></span>
+            <span class="particle-dot dot-b"></span>
+            <span class="particle-dot dot-c"></span>
+          </div>
+        </div>
+
+        <div class="welcome-stage">
+          <button id="doll" class="doll sticker" type="button" aria-label="可拖拽的人物玩偶">
+            <img src="./assets/doll-floating.png" alt="陈雪婷人物玩偶贴纸" draggable="false" />
+          </button>
+          <button id="catAssistant" class="cat-assistant sticker" type="button" aria-label="点击阿比西尼亚猫助手">
+            <img src="./assets/aby-cat-floating.png" alt="阿比西尼亚猫小助手" draggable="false" />
+          </button>
+          <div id="catBubble" class="cat-bubble" role="status">
+            喵，先拆问题
+          </div>
+          <span class="doodle paw-one" aria-hidden="true"></span>
+          <span class="doodle cursor-one" aria-hidden="true"></span>
+        </div>
+      </section>
+
+      <section id="experience" class="screen experience-screen" aria-labelledby="experience-title">
+        <div class="screen-heading">
+          <p class="eyebrow">Experience Timeline</p>
+          <h2 id="experience-title">产品经理的成长轨迹</h2>
+          <p>这里先保留可替换占位结构，避免编造公司、年份和未经确认的数据。</p>
+        </div>
+        <div id="timeline" class="timeline"></div>
+      </section>
+
+      <section id="workflow" class="screen workflow-screen" aria-labelledby="workflow-title">
+        <div class="screen-heading">
+          <p class="eyebrow">AI Workflow</p>
+          <h2 id="workflow-title">我是如何把 AI 放进产品经理工作链路</h2>
+          <p class="core-quote">AI 不是替我做决定，而是帮我把混乱信息整理到可以判断的程度。</p>
+        </div>
+        <div class="workflow-board">
+          <div id="workflowLayers" class="workflow-layers"></div>
+          <div id="workflowSteps" class="workflow-track"></div>
+        </div>
+      </section>
+
+      <section id="projects" class="screen projects-screen" aria-labelledby="projects-title">
+        <div class="screen-heading">
+          <p class="eyebrow">Project Workshop</p>
+          <h2 id="projects-title">项目工坊</h2>
+          <p>把真实落地的项目放进一个个可打开的文件夹里，后续点击进入详情弹窗。</p>
+        </div>
+        <div class="projects-layout">
+          <div id="featuredProject" class="featured-project"></div>
+          <div id="projectGrid" class="project-grid"></div>
+        </div>
+      </section>
+
+      <section id="life" class="screen life-screen" aria-labelledby="life-title">
+        <div class="screen-heading">
+          <p class="eyebrow">Life Lab</p>
+          <h2 id="life-title">生活实验室</h2>
+          <p>这里不是项目列表，而是猫、运动、演唱会、审美和长期学习组成的拼贴墙。</p>
+        </div>
+        <div class="life-board">
+          <div id="lifeGrid" class="life-collage"></div>
+          <button id="mbtiOpen" class="mbti-card" type="button">
+            <span>来猜猜我的 MBTI</span>
+            <strong>答案藏在这个网站的细节里</strong>
+            <small>点击开启</small>
+          </button>
+        </div>
+      </section>
+
+      <section id="contact" class="screen contact-screen" aria-labelledby="contact-title">
+        <div class="contact-copy">
+          <p class="eyebrow">Contact</p>
+          <h2 id="contact-title">欢迎来聊真实问题、复杂流程和能落地的 AI 应用</h2>
+          <div class="talk-topics">
+            <span>AI 产品经理机会</span>
+            <span>工具型产品</span>
+            <span>游戏活动与平台产品</span>
+            <span>AI 工作流提效</span>
+            <span>复杂业务流程拆解</span>
+          </div>
+          <div class="contact-grid">
+            <a href="mailto:xueting_chen@dingcat.com"><b>Email</b><span>xueting_chen@dingcat.com</span></a>
+            <a href="#" aria-label="微信占位"><b>微信</b><span>DingCat_Kitty</span></a>
+            <a href="#" aria-label="GitHub 占位"><b>GitHub</b><span>待补充</span></a>
+            <a href="#" aria-label="Portfolio 占位"><b>Portfolio</b><span>作品集入口</span></a>
+            <a href="#" aria-label="其他社交链接占位"><b>社交链接</b><span>待补充</span></a>
+          </div>
+        </div>
+        <div class="desk-scene" aria-hidden="true">
+          <span class="desk-object lamp"></span>
+          <span class="desk-object coffee"></span>
+          <span class="desk-object folder-stack"></span>
+          <div class="mail-window">
+            <span class="mail-title">DingCat Mail</span>
+            <p>真实问题进入收件箱</p>
+            <p>复杂流程拆成路线图</p>
+            <p>AI 应用落到工作链路</p>
+          </div>
+          <img src="./assets/aby-cat-floating.png" alt="" />
+          <span class="desk-note">Let's build something useful.</span>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="projectModal" class="modal">
+      <form method="dialog">
+        <button class="modal-close" aria-label="关闭项目详情">×</button>
+      </form>
+      <div id="projectDetail"></div>
+    </dialog>
+
+    <dialog id="mbtiModal" class="modal mbti-modal">
+      <form method="dialog">
+        <button class="modal-close" aria-label="关闭 MBTI 彩蛋">×</button>
+      </form>
+      <p class="eyebrow">隐藏人格测试</p>
+      <h2>来猜猜我的 MBTI</h2>
+      <p>答案藏在网站细节里，可以去项目页、AI 链路、阿比猫提示里找线索。</p>
+      <div id="mbtiLetters" class="mbti-picker"></div>
+      <button id="mbtiSubmit" class="primary-button" type="button" disabled>提交答案</button>
+      <div id="mbtiFeedback" class="mbti-feedback" role="status"></div>
+    </dialog>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
