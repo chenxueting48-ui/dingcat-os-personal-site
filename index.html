@@ -11,55 +11,30 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header class="system-bar" aria-label="DingCat OS 系统状态栏">
-      <a class="brand system-brand" href="#welcome" aria-label="回到欢迎页">
-        <span class="brand-mark">DC</span>
-        <span>
-          <strong>DingCat OS</strong>
-          <small>陈雪婷的个人空间</small>
-        </span>
-      </a>
-      <div class="system-menu" aria-hidden="true">
-        <span>系统</span>
-        <span>文件</span>
-        <span>编辑</span>
-        <span>视图</span>
-        <span>窗口</span>
-        <span>帮助</span>
-      </div>
-      <div class="system-status" aria-label="系统状态">
-        <span>24°C 晴</span>
-        <span>Wi-Fi</span>
-        <span>音量</span>
-        <span>100%</span>
-        <span id="systemTime">10:30</span>
-      </div>
-    </header>
-
     <nav class="dock-nav" aria-label="DingCat OS Dock 导航">
       <a href="#welcome" class="nav-item active" data-nav="welcome">
         <span class="dock-icon dock-home" aria-hidden="true"></span>
-        <small>Welcome</small>
+        <small>欢迎</small>
       </a>
       <a href="#experience" class="nav-item" data-nav="experience">
         <span class="dock-icon dock-about" aria-hidden="true"></span>
-        <small>About</small>
+        <small>关于我</small>
       </a>
       <a href="#workflow" class="nav-item" data-nav="workflow">
         <span class="dock-icon dock-ai" aria-hidden="true"></span>
-        <small>AI Workflow</small>
+        <small>AI 链路</small>
       </a>
       <a href="#projects" class="nav-item" data-nav="projects">
         <span class="dock-icon dock-projects" aria-hidden="true"></span>
-        <small>Projects</small>
+        <small>项目</small>
       </a>
       <a href="#life" class="nav-item" data-nav="life">
         <span class="dock-icon dock-life" aria-hidden="true"></span>
-        <small>Life Lab</small>
+        <small>生活</small>
       </a>
       <a href="#contact" class="nav-item" data-nav="contact">
         <span class="dock-icon dock-contact" aria-hidden="true"></span>
-        <small>Contact</small>
+        <small>联系</small>
       </a>
     </nav>
 
@@ -73,6 +48,10 @@
             <span class="particle-dot dot-b"></span>
             <span class="particle-dot dot-c"></span>
           </div>
+          <div class="welcome-actions" aria-label="首页行动按钮">
+            <a class="action-button primary-action" href="/resume.pdf">下载简历</a>
+            <a class="action-button secondary-action" href="#contact">联系我</a>
+          </div>
         </div>
 
         <div class="welcome-stage">
@@ -85,30 +64,40 @@
           <div id="catBubble" class="cat-bubble" role="status">
             喵，先拆问题
           </div>
-          <span class="doodle paw-one" aria-hidden="true"></span>
-          <span class="doodle cursor-one" aria-hidden="true"></span>
         </div>
       </section>
 
       <section id="experience" class="screen experience-screen" aria-labelledby="experience-title">
         <div class="screen-heading">
-          <p class="eyebrow">Experience Timeline</p>
-          <h2 id="experience-title">产品经理的成长轨迹</h2>
-          <p>这里先保留可替换占位结构，避免编造公司、年份和未经确认的数据。</p>
+          <p class="eyebrow">About / Experience</p>
+          <h2 id="experience-title">我的产品经理成长轨迹</h2>
+          <p>从数据平台到海外网页活动，在真实项目里积累产品判断力。</p>
         </div>
         <div id="timeline" class="timeline"></div>
+        <div class="capability-evolution" aria-label="能力沉淀线">
+          <p>这些经历沉淀成我的产品能力路径</p>
+          <div class="capability-line">
+            <span class="capability-node data-node" data-tooltip="从数据表、交易流程和后台系统理解业务闭环"><strong>数据与交易链路</strong><small>理解业务闭环</small></span>
+            <span class="capability-node web-node" data-tooltip="将活动规则、页面状态和增长入口落成页面"><strong>官网与活动搭建</strong><small>推动页面落地</small></span>
+            <span class="capability-node flow-node" data-tooltip="在多项目并行中管理节奏和优先级"><strong>多业务线推进</strong><small>协调复杂节奏</small></span>
+            <span class="capability-node check-node" data-tooltip="把重复经验整理成模板和 checklist"><strong>标准化沉淀</strong><small>复用交付经验</small></span>
+            <span class="capability-node ai-node" data-tooltip="用 AI 承接信息整理、文档生成和复盘沉淀"><strong>AI 工作流提效</strong><small>放大产品效率</small></span>
+          </div>
+        </div>
       </section>
 
       <section id="workflow" class="screen workflow-screen" aria-labelledby="workflow-title">
         <div class="screen-heading">
           <p class="eyebrow">AI Workflow</p>
-          <h2 id="workflow-title">我是如何把 AI 放进产品经理工作链路</h2>
-          <p class="core-quote">AI 不是替我做决定，而是帮我把混乱信息整理到可以判断的程度。</p>
+          <h2 id="workflow-title">我是如何用 AI 推进一个需求从 0 到上线</h2>
+          <p class="core-quote">AI 不是替我做决策，而是帮我把混乱的信息整理成可以判断、可以推进、可以复用的工作链路。</p>
         </div>
-        <div class="workflow-board">
-          <div id="workflowLayers" class="workflow-layers"></div>
-          <div id="workflowSteps" class="workflow-track"></div>
+        <div class="workflow-showcase" aria-label="AI 工作流步骤对比图">
+          <button class="workflow-switch workflow-prev" type="button" data-workflow-switch="-1" aria-label="查看上一步">‹</button>
+          <div id="workflowStage" class="workflow-stage" aria-live="polite"></div>
+          <button class="workflow-switch workflow-next" type="button" data-workflow-switch="1" aria-label="查看下一步">›</button>
         </div>
+        <div id="workflowStepNav" class="workflow-step-nav" aria-label="AI 工作流 6 步导航"></div>
       </section>
 
       <section id="projects" class="screen projects-screen" aria-labelledby="projects-title">
@@ -173,6 +162,16 @@
         </div>
       </section>
     </main>
+
+    <dialog id="experienceModal" class="modal experience-modal">
+      <div class="modal-titlebar">
+        <span id="experienceModalTitle">经历详情</span>
+        <form method="dialog">
+          <button class="modal-close" aria-label="关闭经历详情">×</button>
+        </form>
+      </div>
+      <div id="experienceDetail" class="experience-detail"></div>
+    </dialog>
 
     <dialog id="projectModal" class="modal">
       <form method="dialog">
