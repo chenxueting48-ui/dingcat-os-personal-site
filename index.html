@@ -89,15 +89,32 @@
       <section id="workflow" class="screen workflow-screen" aria-labelledby="workflow-title">
         <div class="screen-heading">
           <p class="eyebrow">AI Workflow</p>
-          <h2 id="workflow-title">我是如何用 AI 推进一个需求从 0 到上线</h2>
-          <p class="core-quote">AI 不是替我做决策，而是帮我把混乱的信息整理成可以判断、可以推进、可以复用的工作链路。</p>
+          <h2 id="workflow-title">我是如何用 AI 重做产品工作流程</h2>
+          <p class="core-quote">把重复整理交给 AI，把判断和推进留给产品经理。</p>
         </div>
-        <div class="workflow-showcase" aria-label="AI 工作流步骤对比图">
-          <button class="workflow-switch workflow-prev" type="button" data-workflow-switch="-1" aria-label="查看上一步">‹</button>
-          <div id="workflowStage" class="workflow-stage" aria-live="polite"></div>
-          <button class="workflow-switch workflow-next" type="button" data-workflow-switch="1" aria-label="查看下一步">›</button>
+        <div id="workflowSceneTabs" class="workflow-scene-tabs" role="tablist" aria-label="AI 工作流场景">
+          <button class="workflow-scene-tab is-active" type="button" role="tab" aria-selected="true" data-workflow-scene="prototype">
+            <span>01</span>原型交付
+          </button>
+          <button class="workflow-scene-tab" type="button" role="tab" aria-selected="false" data-workflow-scene="document">
+            <span>02</span>同步文档
+          </button>
+          <button class="workflow-scene-tab" type="button" role="tab" aria-selected="false" data-workflow-scene="multitask">
+            <span>03</span>多活动并行
+          </button>
         </div>
-        <div id="workflowStepNav" class="workflow-step-nav" aria-label="AI 工作流 6 步导航"></div>
+        <div class="prototype-delivery-wrap">
+          <div
+            id="prototypeDelivery"
+            class="prototype-delivery"
+            tabindex="0"
+            role="button"
+            aria-label="点击敲碎传统原型交付流程，查看 AI 辅助原型流程"
+            aria-describedby="prototypeDeliveryStatus"
+          ></div>
+          <button id="prototypeReset" class="prototype-reset" type="button" hidden>↺ 旧流程</button>
+          <p id="prototypeDeliveryStatus" class="sr-only" aria-live="polite">当前展示传统原型交付流程。</p>
+        </div>
       </section>
 
       <section id="projects" class="screen projects-screen" aria-labelledby="projects-title">

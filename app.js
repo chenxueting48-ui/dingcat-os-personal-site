@@ -836,88 +836,341 @@ function workflowSideTemplate(side, mode) {
   `;
 }
 
-function renderWorkflowStep(index = 0, direction = 0) {
-  const step = data.workflowSteps[index];
-  const stage = $("#workflowStage");
-  const nav = $("#workflowStepNav");
-  if (!step || !stage || !nav) return;
-
-  stage.classList.remove("slide-prev", "slide-next");
-  stage.innerHTML = `
-    <article class="workflow-comparison" data-step="${index + 1}">
-      <header class="workflow-comparison-head">
-        <span>${step.title}</span>
-        <strong>${step.intent}</strong>
-      </header>
-      <div class="workflow-comparison-body">
-        ${workflowSideTemplate(step.traditional, "traditional")}
-        <div class="workflow-transform" aria-hidden="true">
-          <span>整理成</span>
-          <i></i>
-        </div>
-        ${workflowSideTemplate(step.ai, "ai")}
-      </div>
-      <div class="workflow-output">
-        <span>最终产出</span>
-        <strong>${step.output}</strong>
-      </div>
-    </article>
-  `;
-
-  if (direction) {
-    window.requestAnimationFrame(() => {
-      stage.classList.add(direction > 0 ? "slide-next" : "slide-prev");
-    });
-  }
-
-  nav.innerHTML = data.workflowSteps
-    .map(
-      (item, itemIndex) => `
-        <button class="workflow-step ${itemIndex === index ? "active" : ""}" type="button" data-workflow-step="${itemIndex}" aria-current="${itemIndex === index ? "step" : "false"}">
-          <span>${item.title}</span>
-          <small>${item.short}</small>
-        </button>
-      `
-    )
-    .join("");
-
-  document.querySelector("[data-workflow-switch='-1']")?.toggleAttribute("disabled", index === 0);
-  document.querySelector("[data-workflow-switch='1']")?.toggleAttribute("disabled", index === data.workflowSteps.length - 1);
-}
+const WORKFLOW_SCENES = {
+  prototype: {
+    label: "原型交付",
+    oldSrc: "./assets/prototype-delivery-old-flow.png",
+    aiSrc: "./assets/workflow-prototype-ai.svg",
+    oldAlt: "旧流程：传统原型交付，从多方沟通、手动记录到多轮确认与原型交付",
+    aiAlt: "新流程：AI 辅助原型交付，从信息收集模板到方案确认与原型交付",
+  },
+  document: {
+    label: "同步文档",
+    oldSrc: "./assets/workflow-document-old.svg",
+    aiSrc: "./assets/workflow-document-ai.svg",
+    oldAlt: "旧流程：手动维护同步文档，信息重复搬运、字段易漏且版本难统一",
+    aiAlt: "新流程：AI 辅助同步文档维护，完成材料归集、字段提取、检查并由产品经理定稿",
+  },
+  multitask: {
+    label: "多活动并行",
+    oldSrc: "./assets/workflow-multitask-old.svg",
+    aiSrc: "./assets/workflow-multitask-ai.svg",
+    oldAlt: "旧流程：多个活动靠人工追踪，状态分散且风险容易后置",
+    aiAlt: "新流程：AI 辅助整理多活动状态，由产品经理判断优先级并推进",
+  },
+};
 
 function renderWorkflow() {
-  renderWorkflowStep(0);
+  const root = $("#prototypeDelivery");
+  if (!root) return;
+  const initial = WORKFLOW_SCENES.prototype;
+
+  root.innerHTML = `
+    <div class="prototype-layer prototype-ai-layer" aria-hidden="true">
+      <img class="prototype-flow-art" src="${initial.aiSrc}" alt="${initial.aiAlt}" draggable="false" />
+    </div>
+    <div class="prototype-layer prototype-legacy-layer">
+      <img class="prototype-flow-art" src="${initial.oldSrc}" alt="${initial.oldAlt}" draggable="false" />
+    </div>
+    <div class="prototype-shards" aria-hidden="true"></div>
+    <div class="prototype-build-overlay" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i><b></b>
+    </div>
+    <div class="prototype-target-ripple" aria-hidden="true"></div>
+    <div class="prototype-impact" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="prototype-hammer" aria-hidden="true"><span class="hammer-head"></span><span class="hammer-handle"></span></div>
+    <div class="prototype-hint-bubble" aria-hidden="true">试着敲一下</div>
+  `;
 }
 
 function setupWorkflowMap() {
   const section = $("#workflow");
-  if (!section) return;
-  let activeStep = 0;
+  const root = $("#prototypeDelivery");
+  const resetButton = $("#prototypeReset");
+  const status = $("#prototypeDeliveryStatus");
+  const tabs = [...document.querySelectorAll("[data-workflow-scene]")];
+  if (!section || !root || !resetButton || !status || tabs.length === 0) return;
 
-  const setStep = (nextStep) => {
-    const bounded = Math.max(0, Math.min(data.workflowSteps.length - 1, nextStep));
-    if (bounded === activeStep) return;
-    const direction = bounded > activeStep ? 1 : -1;
-    activeStep = bounded;
-    renderWorkflowStep(activeStep, direction);
+  const oldLayer = root.querySelector(":scope > .prototype-legacy-layer");
+  const aiLayer = root.querySelector(":scope > .prototype-ai-layer");
+  const oldImage = oldLayer.querySelector("img");
+  const aiImage = aiLayer.querySelector("img");
+  const shardLayer = root.querySelector(".prototype-shards");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const sceneStates = Object.fromEntries(Object.keys(WORKFLOW_SCENES).map((key) => [key, { revealed: false, visited: false }]));
+  Object.values(WORKFLOW_SCENES).flatMap(({ oldSrc, aiSrc }) => [oldSrc, aiSrc]).forEach((src) => {
+    const image = new Image();
+    image.src = src;
+  });
+  let activeScene = "prototype";
+  let state = "idle";
+  let hasHinted = false;
+  let userInteracted = false;
+  let sectionVisible = false;
+  let hintStartTimer = 0;
+  let hintEndTimer = 0;
+  let breakTimer = 0;
+  let finishTimer = 0;
+  let buildCleanupTimer = 0;
+  let resetTimer = 0;
+  let sceneSwitchTimer = 0;
+
+  const shardShapes = [
+    { shape: "polygon(0 0,26% 0,22% 15%,25% 31%,0 37%)", cx: .12, cy: .16, rotation: -8 },
+    { shape: "polygon(26% 0,52% 0,54% 14%,50% 29%,25% 31%,22% 15%)", cx: .38, cy: .15, rotation: 6 },
+    { shape: "polygon(52% 0,78% 0,80% 16%,75% 32%,50% 29%,54% 14%)", cx: .64, cy: .15, rotation: -5 },
+    { shape: "polygon(78% 0,100% 0,100% 38%,75% 32%,80% 16%)", cx: .89, cy: .17, rotation: 8 },
+    { shape: "polygon(0 37%,25% 31%,22% 48%,28% 64%,0 70%)", cx: .12, cy: .5, rotation: 7 },
+    { shape: "polygon(25% 31%,50% 29%,53% 45%,48% 62%,28% 64%,22% 48%)", cx: .38, cy: .47, rotation: -7 },
+    { shape: "polygon(50% 29%,75% 32%,78% 48%,73% 66%,48% 62%,53% 45%)", cx: .63, cy: .48, rotation: 8 },
+    { shape: "polygon(75% 32%,100% 38%,100% 72%,73% 66%,78% 48%)", cx: .88, cy: .51, rotation: -6 },
+    { shape: "polygon(0 70%,28% 64%,24% 82%,31% 100%,0 100%)", cx: .13, cy: .84, rotation: -9 },
+    { shape: "polygon(28% 64%,48% 62%,54% 80%,58% 100%,31% 100%,24% 82%)", cx: .4, cy: .82, rotation: 7 },
+    { shape: "polygon(48% 62%,73% 66%,76% 82%,79% 100%,58% 100%,54% 80%)", cx: .64, cy: .83, rotation: -5 },
+    { shape: "polygon(73% 66%,100% 72%,100% 100%,79% 100%,76% 82%)", cx: .88, cy: .85, rotation: 9 },
+  ];
+
+  const setState = (nextState) => {
+    state = nextState;
+    root.dataset.interactionState = nextState;
+    root.classList.toggle("is-hovering", nextState === "hover");
+    root.classList.toggle("is-hinting", nextState === "hinting");
+    root.classList.toggle("is-smashing", nextState === "smashing");
+    root.classList.toggle("is-revealed", nextState === "revealed");
+    root.classList.toggle("is-resetting", nextState === "resetting");
   };
 
-  section.addEventListener("click", (event) => {
-    const stepButton = event.target.closest("[data-workflow-step]");
-    if (stepButton) {
-      setStep(Number(stepButton.dataset.workflowStep));
+  const setLocalPosition = (x, y) => {
+    const rect = root.getBoundingClientRect();
+    const boundedX = Math.max(28, Math.min(rect.width - 28, x));
+    const boundedY = Math.max(28, Math.min(rect.height - 28, y));
+    root.style.setProperty("--hammer-x", `${boundedX}px`);
+    root.style.setProperty("--hammer-y", `${boundedY}px`);
+    return { x: boundedX / rect.width, y: boundedY / rect.height };
+  };
+
+  const setPointerPosition = (clientX, clientY) => {
+    const rect = root.getBoundingClientRect();
+    return setLocalPosition(clientX - rect.left, clientY - rect.top);
+  };
+
+  const clearHint = () => {
+    window.clearTimeout(hintStartTimer);
+    window.clearTimeout(hintEndTimer);
+    hintStartTimer = 0;
+    hintEndTimer = 0;
+    if (state === "hinting") setState(root.matches(":hover") ? "hover" : "idle");
+  };
+
+  const clearTransientTimers = () => {
+    [breakTimer, finishTimer, buildCleanupTimer, resetTimer, sceneSwitchTimer].forEach((timer) => window.clearTimeout(timer));
+    breakTimer = finishTimer = buildCleanupTimer = resetTimer = sceneSwitchTimer = 0;
+  };
+
+  const setScenePresentation = (sceneKey, animate = false) => {
+    const scene = WORKFLOW_SCENES[sceneKey];
+    const revealed = sceneStates[sceneKey].revealed;
+    const apply = () => {
+      activeScene = sceneKey;
+      oldImage.src = scene.oldSrc;
+      oldImage.alt = scene.oldAlt;
+      aiImage.src = scene.aiSrc;
+      aiImage.alt = scene.aiAlt;
+      oldLayer.setAttribute("aria-hidden", String(revealed));
+      aiLayer.setAttribute("aria-hidden", String(!revealed));
+      resetButton.hidden = !revealed;
+      root.setAttribute("aria-label", revealed
+        ? `当前展示${scene.label}的 AI 辅助流程`
+        : `点击敲碎${scene.label}的传统流程，查看 AI 辅助流程`);
+      if (revealed) root.setAttribute("aria-disabled", "true");
+      else root.removeAttribute("aria-disabled");
+      setState(revealed ? "revealed" : "idle");
+      status.textContent = `当前展示${scene.label}的${revealed ? "AI 辅助" : "传统"}流程。`;
+      tabs.forEach((tab) => {
+        const selected = tab.dataset.workflowScene === sceneKey;
+        tab.classList.toggle("is-active", selected);
+        tab.setAttribute("aria-selected", String(selected));
+        tab.dataset.visited = String(sceneStates[tab.dataset.workflowScene].visited);
+      });
+      requestAnimationFrame(() => root.classList.remove("is-scene-switching"));
+    };
+
+    if (!animate || reducedMotion.matches) {
+      apply();
       return;
     }
-    const switchButton = event.target.closest("[data-workflow-switch]");
-    if (!switchButton) return;
-    setStep(activeStep + Number(switchButton.dataset.workflowSwitch));
+    root.classList.add("is-scene-switching");
+    sceneSwitchTimer = window.setTimeout(() => {
+      apply();
+      sceneSwitchTimer = 0;
+    }, 130);
+  };
+
+  const buildShards = (impact) => {
+    shardLayer.innerHTML = "";
+    shardShapes.forEach(({ shape, cx, cy, rotation }, index) => {
+      const dx = cx - impact.x;
+      const dy = cy - impact.y;
+      const distance = Math.min(1, Math.hypot(dx, dy));
+      const angle = (index / shardShapes.length) * Math.PI * 2;
+      const unitX = distance > .04 ? dx / distance : Math.cos(angle);
+      const unitY = distance > .04 ? dy / distance : Math.sin(angle);
+      const scatterDistance = 48 + (1 - distance) * 44;
+      const shard = document.createElement("div");
+      shard.className = "prototype-shard";
+      shard.style.setProperty("--piece", shape);
+      shard.style.setProperty("--scatter-x", `${(unitX * scatterDistance).toFixed(1)}px`);
+      shard.style.setProperty("--scatter-y", `${(unitY * scatterDistance + 46).toFixed(1)}px`);
+      shard.style.setProperty("--scatter-r", `${rotation + unitX * 3}deg`);
+      shard.style.setProperty("--scatter-delay", `${Math.round(distance * 125)}ms`);
+      const copy = oldLayer.cloneNode(true);
+      copy.removeAttribute("aria-hidden");
+      shard.append(copy);
+      shardLayer.append(shard);
+    });
+  };
+
+  const finalizeReveal = () => {
+    clearTransientTimers();
+    sceneStates[activeScene].revealed = true;
+    sceneStates[activeScene].visited = true;
+    shardLayer.innerHTML = "";
+    root.classList.remove("is-striking", "is-breaking");
+    setState("revealed");
+    oldLayer.setAttribute("aria-hidden", "true");
+    aiLayer.setAttribute("aria-hidden", "false");
+    root.setAttribute("aria-label", `当前展示${WORKFLOW_SCENES[activeScene].label}的 AI 辅助流程`);
+    root.setAttribute("aria-disabled", "true");
+    resetButton.hidden = false;
+    status.textContent = `当前展示${WORKFLOW_SCENES[activeScene].label}的 AI 辅助流程。`;
+    tabs.find((tab) => tab.dataset.workflowScene === activeScene).dataset.visited = "true";
+    buildCleanupTimer = window.setTimeout(() => root.classList.remove("is-building"), reducedMotion.matches ? 1 : 180);
+  };
+
+  const revealAiFlow = (event) => {
+    if (!["idle", "hover", "hinting"].includes(state)) return;
+    userInteracted = true;
+    clearHint();
+    clearTransientTimers();
+    const rect = root.getBoundingClientRect();
+    const pointerEvent = Number.isFinite(event?.clientX) && event.clientX > 0;
+    const impact = pointerEvent
+      ? setPointerPosition(event.clientX, event.clientY)
+      : setLocalPosition(rect.width * .54, rect.height * .48);
+    setState("smashing");
+    root.classList.add("is-striking");
+    status.textContent = `正在敲碎${WORKFLOW_SCENES[activeScene].label}的传统流程。`;
+
+    if (reducedMotion.matches) {
+      root.classList.add("is-breaking");
+      finishTimer = window.setTimeout(finalizeReveal, 280);
+      return;
+    }
+    breakTimer = window.setTimeout(() => {
+      buildShards(impact);
+      root.classList.add("is-breaking", "is-building");
+    }, 250);
+    finishTimer = window.setTimeout(finalizeReveal, 1180);
+  };
+
+  const resetFlow = () => {
+    if (state !== "revealed") return;
+    clearHint();
+    clearTransientTimers();
+    sceneStates[activeScene].revealed = false;
+    shardLayer.innerHTML = "";
+    root.classList.remove("is-striking", "is-breaking", "is-building");
+    setState("resetting");
+    resetButton.hidden = true;
+    oldLayer.removeAttribute("aria-hidden");
+    aiLayer.setAttribute("aria-hidden", "true");
+    root.removeAttribute("aria-disabled");
+    root.setAttribute("aria-label", `点击敲碎${WORKFLOW_SCENES[activeScene].label}的传统流程，查看 AI 辅助流程`);
+    status.textContent = `当前展示${WORKFLOW_SCENES[activeScene].label}的传统流程。`;
+    resetTimer = window.setTimeout(() => setState("idle"), reducedMotion.matches ? 1 : 240);
+    root.focus({ preventScroll: true });
+  };
+
+  const playHint = () => {
+    if (activeScene !== "prototype" || reducedMotion.matches || hasHinted || userInteracted || !sectionVisible || state !== "idle") return;
+    hasHinted = true;
+    hintStartTimer = window.setTimeout(() => {
+      if (userInteracted || !sectionVisible || activeScene !== "prototype" || state !== "idle") return;
+      const rect = root.getBoundingClientRect();
+      setLocalPosition(rect.width * .72, rect.height * .31);
+      setState("hinting");
+      hintEndTimer = window.setTimeout(() => state === "hinting" && setState("idle"), 1050);
+    }, 1200);
+  };
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      const sceneKey = tab.dataset.workflowScene;
+      if (sceneKey === activeScene || ["smashing", "resetting"].includes(state)) return;
+      userInteracted = true;
+      clearHint();
+      clearTransientTimers();
+      shardLayer.innerHTML = "";
+      root.classList.remove("is-striking", "is-breaking", "is-building");
+      setScenePresentation(sceneKey, true);
+    });
+    tab.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+      event.preventDefault();
+      const delta = event.key === "ArrowRight" ? 1 : -1;
+      tabs[(index + delta + tabs.length) % tabs.length].focus();
+    });
   });
 
-  section.addEventListener("keydown", (event) => {
-    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-    event.preventDefault();
-    setStep(activeStep + (event.key === "ArrowRight" ? 1 : -1));
+  root.addEventListener("pointerenter", (event) => {
+    if (!["idle", "hinting"].includes(state)) return;
+    userInteracted = true;
+    clearHint();
+    setPointerPosition(event.clientX, event.clientY);
+    setState("hover");
   });
+  root.addEventListener("pointermove", (event) => {
+    if (!["idle", "hover", "hinting"].includes(state)) return;
+    userInteracted = true;
+    clearHint();
+    setPointerPosition(event.clientX, event.clientY);
+    setState("hover");
+  });
+  root.addEventListener("pointerleave", () => state === "hover" && setState("idle"));
+  root.addEventListener("focus", () => {
+    if (state !== "idle") return;
+    userInteracted = true;
+    clearHint();
+    const rect = root.getBoundingClientRect();
+    setLocalPosition(rect.width * .54, rect.height * .48);
+    setState("hover");
+  });
+  root.addEventListener("blur", () => state === "hover" && setState("idle"));
+  root.addEventListener("click", revealAiFlow);
+  root.addEventListener("keydown", (event) => {
+    if (!["Enter", " "].includes(event.key)) return;
+    event.preventDefault();
+    revealAiFlow();
+  });
+  resetButton.addEventListener("click", resetFlow);
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(([entry]) => {
+      sectionVisible = Boolean(entry?.isIntersecting);
+      if (sectionVisible) playHint();
+      else {
+        clearHint();
+        if (state === "hover") setState("idle");
+        if (state === "smashing") finalizeReveal();
+      }
+    }, { threshold: .55 });
+    observer.observe(section);
+  } else {
+    sectionVisible = true;
+    playHint();
+  }
+
+  setScenePresentation(activeScene);
 }
 
 function projectTemplate(project, index, featured = false) {

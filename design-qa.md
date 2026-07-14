@@ -1,48 +1,44 @@
+**Design QA**
+
+- Source visual truth:
+  - `/var/folders/8z/xb9cgwjx0k73v_t20jlbwm0c0000gn/T/codex-clipboard-84c61b48-c441-4369-b5d7-ba90ff454ac4.png`
+  - `/var/folders/8z/xb9cgwjx0k73v_t20jlbwm0c0000gn/T/codex-clipboard-976f77d4-770c-42b1-bfdc-43123382862b.png`
+- Implementation target: `index.html#workflow`
+- Intended viewport: PC, 1600 x 900
+- States: traditional flow, hover hammer, breaking transition, AI flow, reset
+- Implementation screenshot: unavailable because the local preview server was not approved.
+
+**Evidence**
+
+- Both source PNGs were copied byte-for-byte into `assets/`; binary comparison passed.
+- The section renders the supplied artwork directly with its original 1672 x 941 aspect ratio and `object-fit: contain`.
+- No recoloring, compression, cropping, or generated visual replacement is applied.
+- Script syntax and whitespace validation passed.
+
 **Findings**
-- [P3] Structure-focused mid-fidelity pass
-  Location: Full prototype.
-  Evidence: The page now uses an OS-style navigation model: the former fixed left sidebar and top system bar have been removed, and the primary navigation is a lighter fixed bottom Dock with active section highlighting.
-  Impact: The prototype is ready for reviewing desktop rhythm and information architecture. Visual details such as custom hand-drawn icons, image compression, and exact spacing can be refined next.
-  Fix: After structure approval, run a visual QA pass in browser with desktop and mobile screenshots.
 
-**Open Questions**
-- Replace placeholder company names, year ranges, roles, outcomes, and contact links with confirmed real content.
-- Choose the Featured Project: currently KOC 轻商城 is highlighted, but AI 工作流样板间 can be swapped in if that better represents the personal brand.
+- [P2] Browser-rendered composition and interaction could not be visually verified.
+  Location: AI Workflow section.
+  Evidence: local preview access was unavailable, so no implementation screenshot or same-viewport comparison could be captured.
+  Impact: image fidelity is guaranteed at asset level, but final scaling, Dock clearance, hammer placement, and transition appearance remain unverified in a real browser frame.
+  Fix: open the local page at 1600 x 900, capture the traditional and AI states, compare them with the two source images, and adjust only the third-screen container if needed.
 
-**Implementation Checklist**
-- Fixed left side navigation removed.
-- Top system bar removed to keep the Welcome screen lighter and more immersive.
-- Bottom Dock navigation restyled toward the supplied desktop Dock reference, with active section highlighting and compact state after leaving Welcome.
-- Desktop breakpoint corrected so common desktop preview widths no longer collapse into narrow/mobile layout.
-- Six sections separated into near-100vh scenes.
-- Welcome simplified around the large title and particle hint.
-- Welcome down-arrow cue removed.
-- Welcome intro/tags/buttons strip removed per latest reference feedback.
-- Two unwanted Welcome decorations removed.
-- Aby cat image replaced with a standing sticker-style cat and moved higher in the Welcome scene.
-- Person and cat assets converted to floating transparent PNGs while preserving the original sticker color and nearby sticker details.
-- Welcome drag label removed, and the doll drag interaction now starts from the exact pointer position without jump-back.
-- Bottom Dock updated to the supplied reference style: a light rounded tray with six larger hand-drawn icons and compact labels.
-- Doll drag now listens at window level after pointer-down, so holding any point on the doll sticker keeps it moving even if the cursor leaves the image bounds.
-- Welcome stage widened so the sticker doll and cat sit in an open desktop space instead of a small card.
-- Experience timeline converted to a horizontal safe replaceable content structure.
-- Experience section now uses three placeholder stages plus a lightweight capability accumulation line.
-- AI Workflow now reads as a single work chain with compact input/output context.
-- Projects now include a larger Featured Project plus secondary project folders.
-- Life Lab is an ordered inspiration board with MBTI as a small bottom-right easter egg.
-- Contact is an independent closing screen with topics, contact cards, and desk scene elements.
+**Required Fidelity Surfaces**
 
-**Follow-up Polish**
-- Create real hand-drawn icon assets instead of rough CSS doodles.
-- Compress generated character and cat images.
-- Tune responsive spacing after browser screenshot review.
-- Replace placeholder content with verified resume/project details.
+- Fonts and typography: preserved inside the supplied raster artwork; no HTML recreation.
+- Spacing and layout rhythm: source composition preserved; browser scaling unverified.
+- Colors and visual tokens: exact source PNG files used; no color transformation.
+- Image quality and asset fidelity: exact binary copies, original RGB PNG dimensions preserved.
+- Copy and content: preserved inside the supplied artwork.
 
-source visual truth path: current DingCat OS direction and generated mid-fidelity structure
-implementation screenshot path: not captured in this pass
-viewport: desktop-first responsive prototype
-state: updated six-section page structure
-full-view comparison evidence: blocked, screenshot capture tool unavailable in this pass
-focused region comparison evidence: blocked, screenshot capture tool unavailable in this pass
-patches made since previous QA pass: removed side navigation, removed top system bar, added one-screen scroll snap, lightened bottom Dock navigation, restored centered page flow, removed unwanted welcome decorations and down arrow, replaced cat image with standing cat asset, removed welcome drag label, converted person/cat to floating transparent assets, improved doll drag capture, rebuilt About timeline as placeholder growth framework
-final result: passed
+**Focused Region Comparison**
+
+- Not available because a browser-rendered implementation screenshot could not be captured.
+
+**Comparison History**
+
+- Initial implementation used code-drawn approximations.
+- Replaced both visible workflow layers with the exact supplied source artwork to remove illustration, color, typography, and spacing drift.
+- Post-fix browser comparison remains unavailable.
+
+final result: blocked
