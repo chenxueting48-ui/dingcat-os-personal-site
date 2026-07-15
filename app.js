@@ -177,84 +177,107 @@ const data = {
   ],
   projects: [
     {
-      name: "KOC 轻商城",
-      featured: true,
-      icon: "folder",
-      summary: "从商品展示、下单链路、后台配置到数据复盘的轻量商城项目。",
-      tags: ["商城", "交易链路", "配置后台"],
+      number: "01",
+      name: "商城交易与转化链路",
+      subtitle: "KOC 轻商城 / AHKAH 小程序商城",
+      type: "Commerce",
+      icon: "commerce",
+      summary: "从商品展示、支付订单到私域转化，搭建交易闭环。",
+      tags: ["交易链路", "私域转化", "后台配置"],
+      metrics: [["40w+", "用户"], ["1000+", "日活"], ["60%", "次留"]],
       detail: {
-        项目背景: "面向 KOC 场景，需要更轻的商品展示、下单和推广闭环。",
-        我的角色: "负责需求拆解、核心链路设计、后台配置规则和验收推进。",
-        核心问题: "如何降低配置理解成本，同时保证商品、订单、推广口径一致。",
-        关键规则: "商品上下架、库存扣减、订单状态、推广口径、数据回传。",
-        拆解方式: "先拆交易主链路，再拆后台配置、异常兜底和数据看板。",
-        最终产出: "PRD、流程图、配置说明、验收清单和复盘模板。",
-        "数据 / 影响": "待补充真实数据；当前可展示为支撑上线、沉淀流程、降低沟通成本。",
-        可展示材料: "可展示脱敏流程图、字段表和项目复盘摘要。",
+        positioning: "围绕品牌私域转化与游戏 KOC 商城场景，搭建从商品展示、下单支付、订单流转到数据复盘的交易链路。",
+        representative: ["KOC 轻商城", "AHKAH 小程序商城"],
+        background: "这类项目核心是把用户从内容、商品、活动入口引导到购买和转化，并让运营能够通过后台配置和数据复盘持续优化链路。",
+        responsibilities: [
+          "商品浏览、商品详情、支付结算、订单流转、物流跟踪、收货确认和售后等核心链路设计；",
+          "后台配置、订单状态、数据口径和运营使用流程梳理；",
+          "私域引流、用户转化和复购相关模块设计；",
+          "结合业务目标推进商城闭环落地。",
+        ],
+        coreLabel: "核心交易链路",
+        coreItems: ["商品展示", "搜索筛选", "支付结算", "订单流转", "物流跟踪", "售后处理", "后台配置", "数据复盘"],
+        caseNoteLabel: "代表案例",
+        caseNote: "AHKAH 小程序商城：从 0 到 1 搭建微信小程序私域商城，覆盖商品搜索浏览、品类筛选、商品详情、支付结算、订单流转、物流跟踪、收货确认及售后处理，并支持门店信息展示、LBS 就近筛选和预约记录管理。",
+        outcomes: [["40w+", "累计用户数"], ["1000+", "日均活跃用户"], ["300", "每日新增用户"], ["60%", "次日留存率"], ["20%", "7 日留存率"], ["15w+", "上线 1 年累计注册"], ["约 15%", "品牌私域 GMV"], ["22%+", "老客复购率"]],
+        materials: ["商城交易闭环流程", "支付订单状态", "后台配置逻辑", "私域引流链路", "数据复盘口径"],
+        abilities: ["商城交易闭环", "用户转化链路", "后台配置逻辑", "订单状态与异常处理", "数据复盘意识", "私域引流与复购设计"],
       },
     },
     {
-      name: "社团库存系统",
-      icon: "box",
-      summary: "围绕入库、出库、盘点、提醒搭建的轻量库存管理工具。",
-      tags: ["库存", "后台", "流程"],
-      detail: {
-        项目背景: "社团物资分散、借还记录不统一，盘点成本较高。",
-        我的角色: "梳理业务角色、库存规则、表单字段和后台操作路径。",
-        核心问题: "如何让非专业用户也能稳定完成库存记录和追踪。",
-        关键规则: "物资分类、库存变动、借用归还、低库存提醒、盘点记录。",
-        拆解方式: "以物资生命周期为主线，拆成入库、领用、归还、盘点、报废。",
-        最终产出: "低保真原型、字段说明、状态流转和权限说明。",
-        "数据 / 影响": "待补充真实数据；当前可展示为提升库存状态透明度。",
-        可展示材料: "可展示系统结构图和典型流程。",
-      },
-    },
-    {
+      number: "02",
       name: "AI 工作流样板间",
-      icon: "spark",
-      summary: "把 AI 嵌入产品经理日常产出，用模板和检查链路提升稳定性。",
-      tags: ["AI", "模板", "提效"],
+      subtitle: "网页活动 AI 提效流程与提示词体系",
+      type: "AI Workflow",
+      icon: "ai",
+      summary: "把网页活动从需求输入到上线复盘，拆成可复用的 AI 提效流程。",
+      tags: ["AI 工作流", "提示词", "SOP"],
+      metrics: [["10+", "环节"], ["3 个", "场景"], ["可复用", "提示词"]],
       detail: {
-        项目背景: "产品工作中存在大量重复整理、检查和沉淀动作。",
-        我的角色: "设计工作流、提示词模板、输入规范和质量检查框架。",
-        核心问题: "如何让 AI 输出稳定服务真实交付，而不是一次性灵感。",
-        关键规则: "输入结构、输出格式、风险检查、人工确认点、版本沉淀。",
-        拆解方式: "按输入层、处理层、产出层拆解工作流。",
-        最终产出: "提示词库、文档模板、检查清单和演示样板间。",
-        "数据 / 影响": "待补充真实数据；当前可展示为降低重复整理成本。",
-        可展示材料: "可展示脱敏模板、流程说明和前后对比。",
+        positioning: "这不是一个单点工具，而是一套把 AI 嵌进产品经理工作链路的提效系统。",
+        background: "网页活动需求频繁、信息来源分散，产品经理需要反复整理会议记录、补同步文档、写埋点、跟进测试、上线检查和复盘沉淀。",
+        responsibilities: [
+          "将网页活动从需求输入到上线复盘拆成多个标准环节；",
+          "为每个环节设计提示词、字段规范、检查清单和输出格式；",
+          "用 AI 辅助完成会议记录整理、需求提取、同步文档补全、埋点草案、提测检查、LQA 检查、压测信息收集、域名发布检查和复盘沉淀；",
+          "设计真实活动案例回归测试方案，用来验证提示词和 Skill 是否可用；",
+          "提炼原型交付、同步文档维护、多活动并行 3 个核心提效场景。",
+        ],
+        coreLabel: "AI 提效链路",
+        coreItems: ["会议整理", "需求提取", "同步文档", "埋点草案", "提测检查", "LQA 检查", "上线检查", "复盘沉淀"],
+        caseNoteLabel: "项目价值",
+        caseNote: "让 AI 承担重复整理、初稿生成和缺口暴露，让产品经理把精力放在判断、确认、收口和推进上。",
+        outcomes: [["10+", "标准工作环节"], ["3 个", "核心提效场景"], ["可复用", "提示词体系"], ["可复用", "检查清单"], ["可复用", "回归测试方案"]],
+        materials: ["提示词库", "SOP", "同步文档规则", "检查清单", "回归测试方案", "AI 工作流示意图", "原型交付新旧流程图", "同步文档维护新旧流程图", "多活动并行新旧流程图"],
+        abilities: ["AI 工作流设计", "提示词体系", "SOP 沉淀", "质量检查", "回归验证"],
       },
     },
     {
-      name: "海外支付 / 多区上线",
-      icon: "card",
-      summary: "围绕多地区差异、支付方式、异常路径和上线检查的协同项目。",
-      tags: ["支付", "海外", "上线"],
+      number: "03",
+      name: "信达 BI 数据平台",
+      subtitle: "多平台数据整合、权限体系与监控预警",
+      type: "Data Platform",
+      icon: "data",
+      summary: "整合多平台数据，支撑品牌数字化决策。",
+      tags: ["BI 平台", "数据看板", "监控预警"],
+      metrics: [["250+", "数据表"], ["20+", "品牌"], ["41 个", "分析场景"]],
       detail: {
-        项目背景: "不同地区支付方式、合规口径、展示文案和异常路径存在差异。",
-        我的角色: "梳理链路、对齐规则、推动研发测试验收和上线检查。",
-        核心问题: "如何保证多区规则差异下，用户支付路径清晰且问题可追踪。",
-        关键规则: "币种、支付方式、失败重试、退款、风控、文案和埋点。",
-        拆解方式: "按地区、支付方式、用户状态和异常场景交叉拆表。",
-        最终产出: "规则矩阵、验收用例、上线 checklist 和问题跟踪表。",
-        "数据 / 影响": "待补充真实数据；当前可展示为降低跨区上线遗漏。",
-        可展示材料: "可展示脱敏规则矩阵和检查清单。",
+        positioning: "将多平台数据能力产品化，支撑品牌客户与不同角色进行数字化决策。",
+        background: "为降低运营人力成本、提升数据获取与分析效率，搭建统一的 BI 数据平台，支撑品牌客户进行数字化决策。",
+        responsibilities: [
+          "梳理业务数据表和指标口径；",
+          "推进多平台数据源整合；",
+          "设计不同角色视角下的数据分析场景；",
+          "搭建大促监控、库存预警和竞品信息监测能力；",
+          "将数据能力产品化，服务不同品牌和不同角色的数据消费需求。",
+        ],
+        coreLabel: "核心数据链路",
+        coreItems: ["数据源接入", "数据清洗", "权限角色", "指标看板", "监控预警"],
+        outcomes: [["250+", "数据表梳理"], ["20+", "知名品牌服务"], ["3 类", "角色视角"], ["41 个", "核心分析场景"], ["11 类", "监控场景"], ["80%", "监测预警效率提升"]],
+        caseNoteLabel: "覆盖范围",
+        caseNote: "整合天猫、京东、抖音等多平台数据，服务奔驰、Dyson、Casio 等品牌。",
+        materials: ["数据源结构", "指标口径表", "权限角色设计", "指标看板结构", "监控预警场景"],
+        abilities: ["B 端后台产品设计", "数据指标体系", "多角色权限设计", "业务场景拆解", "数据监控与预警"],
       },
     },
     {
-      name: "H5 活动合集",
-      icon: "game",
-      summary: "游戏网页活动、拉新促活、活动后台和数据分析链路的合集。",
-      tags: ["H5", "活动", "增长"],
+      number: "04",
+      name: "MLBB NEXT 活跃专题活动",
+      subtitle: "任务、积分、抽奖、邀请回流的促活专题活动",
+      type: "Growth",
+      icon: "growth",
+      summary: "通过复合玩法提升海外玩家参与与传播。",
+      tags: ["促活", "裂变", "数据复盘"],
+      metrics: [["5223w+", "PV"], ["664w+", "UV"], ["139w+", "参与玩家"]],
       detail: {
-        项目背景: "多期活动需要快速配置、稳定上线，并能复用基础能力。",
-        我的角色: "负责活动规则、页面状态、后台配置、数据埋点和复盘。",
-        核心问题: "如何兼顾活动创意、规则严谨、上线效率和数据可解释。",
-        关键规则: "参与资格、任务状态、奖励发放、活动时间、异常提示、埋点口径。",
-        拆解方式: "拆成用户路径、任务规则、奖励规则、后台配置和数据分析。",
-        最终产出: "活动 PRD、页面状态表、埋点表、验收清单和复盘文档。",
-        "数据 / 影响": "待补充真实数据；当前可展示为沉淀活动复用流程。",
-        可展示材料: "可展示脱敏页面状态表、规则表和活动复盘。",
+        positioning: "面向缅甸区域 MM 玩家设计促活专题活动，通过任务、积分、抽奖和邀请回流提升参与与传播。",
+        background: "活动目标是提升 DAU，同时兼顾微回流和社交裂变传播。",
+        responsibilities: ["活动需求承接；", "玩法规则设计与整理；", "页面链路推进；", "活动配置协同；", "数据复盘与效果总结。"],
+        coreLabel: "核心玩法",
+        coreItems: ["每日任务", "周末任务", "里程碑积分", "刮刮乐抽奖", "邀请回流"],
+        outcomes: [["5223 万+", "PV"], ["664 万+", "UV"], ["139 万+", "参与玩家"], ["36.63%", "参与率"], ["25.81%", "分享率"]],
+        materials: ["活动规则说明", "任务玩法结构", "抽奖链路", "邀请回流链路", "数据复盘指标"],
+        abilities: ["海外活动设计", "促活玩法设计", "裂变传播机制", "活动数据复盘", "多环节项目推进"],
       },
     },
   ],
@@ -1248,26 +1271,33 @@ function setupWorkflowMap() {
   setScenePresentation(activeScene);
 }
 
-function projectTemplate(project, index, featured = false) {
+function projectTemplate(project, index) {
   return `
-    <button class="${featured ? "featured-project" : "project-card"}" type="button" data-project="${index}">
-      <span class="folder-label">${featured ? "Featured Project" : "项目文件"}</span>
-      <h3>${project.name}</h3>
-      <p>${project.summary}</p>
-      <div class="tag-row">${project.tags.map((tag) => `<span>${tag}</span>`).join("")}</div>
-      <span class="open-hint">查看详情 →</span>
+    <button class="project-folder-card project-folder-card--${project.icon}" type="button" data-project="${index}" aria-label="打开项目档案：${project.name}">
+      <span class="project-folder-sheet" aria-hidden="true"></span>
+      <span class="project-folder-tab-row">
+        <span class="project-folder-tab">PROJECT ${project.number}</span>
+        <span class="project-folder-type">${project.type}</span>
+      </span>
+      <span class="project-card-icon project-card-icon--${project.icon}" aria-hidden="true"><i></i><b></b></span>
+      <span class="project-folder-title">
+        <strong>${project.name}</strong>
+        <small>${project.subtitle}</small>
+      </span>
+      <span class="project-folder-summary">${project.summary}</span>
+      <span class="project-folder-tags">${project.tags.map((tag) => `<i>${tag}</i>`).join("")}</span>
+      <span class="project-card-metrics">
+        ${project.metrics.map(([value, label]) => `<i><strong>${value}</strong><small>${label}</small></i>`).join("")}
+      </span>
+      <span class="project-open-hint">打开档案 →</span>
     </button>
   `;
 }
 
 function renderProjects() {
-  const featuredIndex = data.projects.findIndex((project) => project.featured);
-  $("#featuredProject").outerHTML = projectTemplate(data.projects[featuredIndex], featuredIndex, true);
-  $("#projectGrid").innerHTML = data.projects
-    .map(
-      (project, index) => (index === featuredIndex ? "" : projectTemplate(project, index))
-    )
-    .join("");
+  const grid = $("#projectArchiveGrid");
+  if (!grid) return;
+  grid.innerHTML = data.projects.map(projectTemplate).join("");
 }
 
 function renderLife() {
@@ -1286,28 +1316,164 @@ function renderLife() {
 function setupProjects() {
   const modal = $("#projectModal");
   const detail = $("#projectDetail");
-  document.addEventListener("click", (event) => {
-    const card = event.target.closest("[data-project]");
-    if (!card) return;
-    const project = data.projects[Number(card.dataset.project)];
+  const grid = $("#projectArchiveGrid");
+  const modalTitle = $("#projectModalTitle");
+  if (!modal || !detail || !grid) return;
+  let activeProjectTrigger = null;
+  const projectTabs = [
+    ["overview", "概览"],
+    ["responsibilities", "我的职责"],
+    ["core", "核心链路"],
+    ["outcomes", "成果数据"],
+    ["materials", "可展示材料"],
+  ];
+
+  const renderPills = (items, className = "project-detail-pills") => `
+    <div class="${className}">${items.map((item) => `<span>${item}</span>`).join("")}</div>
+  `;
+
+  const renderMetrics = (items, className = "project-metric-grid") => `
+    <div class="${className}">
+      ${items.map(([value, label]) => `<span><strong>${value}</strong><small>${label}</small></span>`).join("")}
+    </div>
+  `;
+
+  const renderProjectPanel = (project, activeTab) => {
+    if (activeTab === "responsibilities") {
+      return `
+        <section class="project-tab-panel" role="tabpanel" id="project-panel-responsibilities" aria-labelledby="project-tab-responsibilities">
+          <p class="project-panel-kicker">MY ROLE</p>
+          <h3>我的职责</h3>
+          <ul>${project.detail.responsibilities.map((item) => `<li>${item}</li>`).join("")}</ul>
+        </section>
+      `;
+    }
+
+    if (activeTab === "core") {
+      return `
+        <section class="project-tab-panel project-core-section" role="tabpanel" id="project-panel-core" aria-labelledby="project-tab-core">
+          <p class="project-panel-kicker">CORE FLOW</p>
+          <h3>${project.detail.coreLabel}</h3>
+          ${renderPills(project.detail.coreItems, "project-flow-pills")}
+          ${project.detail.caseNote ? `<div class="project-case-note"><strong>${project.detail.caseNoteLabel}</strong><p>${project.detail.caseNote}</p></div>` : ""}
+        </section>
+      `;
+    }
+
+    if (activeTab === "outcomes") {
+      return `
+        <section class="project-tab-panel" role="tabpanel" id="project-panel-outcomes" aria-labelledby="project-tab-outcomes">
+          <p class="project-panel-kicker">RESULTS</p>
+          <h3>成果数据</h3>
+          ${renderMetrics(project.detail.outcomes)}
+        </section>
+      `;
+    }
+
+    if (activeTab === "materials") {
+      return `
+        <section class="project-tab-panel" role="tabpanel" id="project-panel-materials" aria-labelledby="project-tab-materials">
+          <p class="project-panel-kicker">ARCHIVE MATERIALS</p>
+          <h3>可展示材料</h3>
+          ${renderPills(project.detail.materials || [], "project-material-list")}
+        </section>
+      `;
+    }
+
+    return `
+      <section class="project-tab-panel project-overview-panel" role="tabpanel" id="project-panel-overview" aria-labelledby="project-tab-overview">
+        <p class="project-panel-kicker">PROJECT OVERVIEW</p>
+        <h3>项目概览</h3>
+        <p class="project-positioning">${project.detail.positioning}</p>
+        ${project.detail.representative ? `<div class="project-representative"><strong>代表项目</strong>${renderPills(project.detail.representative)}</div>` : ""}
+        <div class="project-background-note">
+          <strong>${project.number === "04" ? "项目目标" : "项目背景"}</strong>
+          <p>${project.detail.background}</p>
+        </div>
+      </section>
+    `;
+  };
+
+  const renderProjectArchive = (projectIndex, activeTab = "overview") => {
+    const project = data.projects[projectIndex];
+    modal.dataset.projectIndex = String(projectIndex);
     detail.innerHTML = `
-      <p class="eyebrow">Project Detail</p>
-      <h2>${project.name}</h2>
-      <p>${project.summary}</p>
-      <div class="detail-grid">
-        ${Object.entries(project.detail)
-          .map(
-            ([key, value]) => `
-              <div class="detail-block">
-                <strong>${key}</strong>
-                <span>${value}</span>
-              </div>
-            `
-          )
-          .join("")}
+      <div class="project-detail-body">
+        <header class="project-detail-head">
+          <div class="project-detail-meta">
+            <span class="project-detail-number">PROJECT ${project.number}</span>
+            <span class="project-detail-type">${project.type}</span>
+          </div>
+          <h2>${project.name}</h2>
+          <p class="project-detail-subtitle">${project.subtitle}</p>
+          <p class="project-detail-summary">${project.detail.positioning}</p>
+          ${renderMetrics(project.metrics, "project-hero-metrics")}
+        </header>
+        <div class="project-detail-tabs" role="tablist" aria-label="项目档案目录">
+          ${projectTabs.map(([key, label]) => `
+            <button
+              id="project-tab-${key}"
+              class="project-detail-tab ${activeTab === key ? "is-active" : ""}"
+              type="button"
+              role="tab"
+              data-project-tab="${key}"
+              aria-selected="${activeTab === key}"
+              aria-controls="project-panel-${key}"
+              tabindex="${activeTab === key ? "0" : "-1"}"
+            >${label}</button>
+          `).join("")}
+        </div>
+        <div class="project-tab-content">
+          ${renderProjectPanel(project, activeTab)}
+        </div>
       </div>
     `;
+  };
+
+  grid.addEventListener("click", (event) => {
+    const card = event.target.closest("[data-project]");
+    if (!card) return;
+    const projectIndex = Number(card.dataset.project);
+    const project = data.projects[projectIndex];
+    activeProjectTrigger = card;
+    modal.dataset.origin = projectIndex % 2 === 0 ? "left" : "right";
+    modalTitle.textContent = `PROJECT ${project.number} / ${project.name}`;
+    card.classList.add("is-opening");
+    window.setTimeout(() => card.classList.remove("is-opening"), 260);
+    renderProjectArchive(projectIndex);
     openModal(modal);
+    window.setTimeout(() => modal.querySelector(".modal-close")?.focus({ preventScroll: true }), 0);
+  });
+
+  detail.addEventListener("click", (event) => {
+    const tab = event.target.closest("[data-project-tab]");
+    if (!tab) return;
+    const projectIndex = Number(modal.dataset.projectIndex);
+    const tabKey = tab.dataset.projectTab;
+    const currentScroll = detail.scrollTop;
+    renderProjectArchive(projectIndex, tabKey);
+    detail.scrollTop = currentScroll;
+    window.setTimeout(() => detail.querySelector(`[data-project-tab="${tabKey}"]`)?.focus({ preventScroll: true }), 0);
+  });
+
+  detail.addEventListener("keydown", (event) => {
+    const tab = event.target.closest("[data-project-tab]");
+    if (!tab || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    const keys = projectTabs.map(([key]) => key);
+    const currentIndex = keys.indexOf(tab.dataset.projectTab);
+    const nextIndex = event.key === "Home"
+      ? 0
+      : event.key === "End"
+        ? keys.length - 1
+        : (currentIndex + (event.key === "ArrowRight" ? 1 : -1) + keys.length) % keys.length;
+    const nextTab = detail.querySelector(`[data-project-tab="${keys[nextIndex]}"]`);
+    nextTab?.click();
+  });
+
+  modal.addEventListener("close", () => {
+    activeProjectTrigger?.focus({ preventScroll: true });
+    activeProjectTrigger = null;
   });
 }
 

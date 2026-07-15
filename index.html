@@ -8,7 +8,7 @@
       content="DingCat OS：陈雪婷的个人空间，一个蓝黄白手绘风个人网站中保真原型。"
     />
     <title>DingCat OS | 陈雪婷的个人空间</title>
-    <link rel="stylesheet" href="./styles.css?v=workflow-chapters-20260715" />
+    <link rel="stylesheet" href="./styles.css?v=project-archive-tabs-20260716" />
   </head>
   <body>
     <nav class="dock-nav" aria-label="DingCat OS Dock 导航">
@@ -121,14 +121,11 @@
 
       <section id="projects" class="screen projects-screen" aria-labelledby="projects-title">
         <div class="screen-heading">
-          <p class="eyebrow">Project Workshop</p>
+          <p class="eyebrow">PROJECT WORKSHOP</p>
           <h2 id="projects-title">项目工坊</h2>
-          <p>把真实落地的项目放进一个个可打开的文件夹里，后续点击进入详情弹窗。</p>
+          <p>把真实落地过的产品项目，收进一个个可打开的项目档案里。</p>
         </div>
-        <div class="projects-layout">
-          <div id="featuredProject" class="featured-project"></div>
-          <div id="projectGrid" class="project-grid"></div>
-        </div>
+        <div id="projectArchiveGrid" class="project-archive-grid" aria-label="代表项目档案"></div>
       </section>
 
       <section id="life" class="screen life-screen" aria-labelledby="life-title">
@@ -192,11 +189,14 @@
       <div id="experienceDetail" class="experience-detail"></div>
     </dialog>
 
-    <dialog id="projectModal" class="modal">
-      <form method="dialog">
-        <button class="modal-close" aria-label="关闭项目详情">×</button>
-      </form>
-      <div id="projectDetail"></div>
+    <dialog id="projectModal" class="modal project-modal" aria-labelledby="projectModalTitle">
+      <div class="modal-titlebar">
+        <span id="projectModalTitle">项目档案</span>
+        <form method="dialog">
+          <button class="modal-close" aria-label="关闭项目详情">×</button>
+        </form>
+      </div>
+      <div id="projectDetail" class="project-detail"></div>
     </dialog>
 
     <dialog id="mbtiModal" class="modal mbti-modal">
@@ -211,6 +211,6 @@
       <div id="mbtiFeedback" class="mbti-feedback" role="status"></div>
     </dialog>
 
-    <script src="./app.js?v=workflow-chapters-20260715"></script>
+    <script src="./app.js?v=project-archive-tabs-20260716"></script>
   </body>
 </html>
