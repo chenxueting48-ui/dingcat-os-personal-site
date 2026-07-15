@@ -839,26 +839,28 @@ function workflowSideTemplate(side, mode) {
 const WORKFLOW_SCENES = {
   prototype: {
     label: "原型交付",
-    oldSrc: "./assets/prototype-delivery-old-flow.png",
-    aiSrc: "./assets/workflow-prototype-ai.svg",
+    oldSrc: "./assets/workflow-prototype-old-custom.png",
+    aiSrc: "./assets/workflow-prototype-ai-custom.png",
     oldAlt: "旧流程：传统原型交付，从多方沟通、手动记录到多轮确认与原型交付",
     aiAlt: "新流程：AI 辅助原型交付，从信息收集模板到方案确认与原型交付",
   },
   document: {
     label: "同步文档",
-    oldSrc: "./assets/workflow-document-old.svg",
-    aiSrc: "./assets/workflow-document-ai.svg",
+    oldSrc: "./assets/workflow-document-old-custom.png",
+    aiSrc: "./assets/workflow-document-ai-custom.png",
     oldAlt: "旧流程：手动维护同步文档，信息重复搬运、字段易漏且版本难统一",
     aiAlt: "新流程：AI 辅助同步文档维护，完成材料归集、字段提取、检查并由产品经理定稿",
   },
   multitask: {
     label: "多活动并行",
-    oldSrc: "./assets/workflow-multitask-old.svg",
-    aiSrc: "./assets/workflow-multitask-ai.svg",
+    oldSrc: "./assets/workflow-multitask-old-custom.png",
+    aiSrc: "./assets/workflow-multitask-ai-custom.png",
     oldAlt: "旧流程：多个活动靠人工追踪，状态分散且风险容易后置",
     aiAlt: "新流程：AI 辅助整理多活动状态，由产品经理判断优先级并推进",
   },
 };
+
+const WORKFLOW_SCENE_KEYS = ["prototype", "document", "multitask"];
 
 function renderWorkflow() {
   const root = $("#prototypeDelivery");
@@ -887,9 +889,11 @@ function setupWorkflowMap() {
   const section = $("#workflow");
   const root = $("#prototypeDelivery");
   const resetButton = $("#prototypeReset");
+  const nextButton = $("#workflowNext");
+  const progress = $("#workflowProgress");
   const status = $("#prototypeDeliveryStatus");
   const tabs = [...document.querySelectorAll("[data-workflow-scene]")];
-  if (!section || !root || !resetButton || !status || tabs.length === 0) return;
+  if (!section || !root || !resetButton || !nextButton || !progress || !status || tabs.length === 0) return;
 
   const oldLayer = root.querySelector(":scope > .prototype-legacy-layer");
   const aiLayer = root.querySelector(":scope > .prototype-ai-layer");
@@ -897,15 +901,13 @@ function setupWorkflowMap() {
   const aiImage = aiLayer.querySelector("img");
   const shardLayer = root.querySelector(".prototype-shards");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const sceneStates = Object.fromEntries(Object.keys(WORKFLOW_SCENES).map((key) => [key, { revealed: false, visited: false }]));
+  const sceneStates = Object.fromEntries(WORKFLOW_SCENE_KEYS.map((key) => [key, { revealed: false, visited: false, hinted: false }]));
   Object.values(WORKFLOW_SCENES).flatMap(({ oldSrc, aiSrc }) => [oldSrc, aiSrc]).forEach((src) => {
     const image = new Image();
     image.src = src;
   });
   let activeScene = "prototype";
   let state = "idle";
-  let hasHinted = false;
-  let userInteracted = false;
   let sectionVisible = false;
   let hintStartTimer = 0;
   let hintEndTimer = 0;
@@ -967,10 +969,47 @@ function setupWorkflowMap() {
     breakTimer = finishTimer = buildCleanupTimer = resetTimer = sceneSwitchTimer = 0;
   };
 
-  const setScenePresentation = (sceneKey, animate = false) => {
+  const sceneIndex = (sceneKey = activeScene) => WORKFLOW_SCENE_KEYS.indexOf(sceneKey);
+
+  const updateChapterProgress = () => {
+    const currentIndex = sceneIndex();
+    progress.textContent = `${currentIndex + 1} / ${WORKFLOW_SCENE_KEYS.length}`;
+    tabs.forEach((tab) => {
+      const sceneKey = tab.dataset.workflowScene;
+      const selected = sceneKey === activeScene;
+      const completed = sceneStates[sceneKey].revealed;
+      tab.classList.toggle("is-active", selected);
+      tab.classList.toggle("is-complete", completed);
+      tab.dataset.visited = String(completed);
+      tab.dataset.chapterState = selected ? "current" : completed ? "complete" : "pending";
+      if (selected) tab.setAttribute("aria-current", "step");
+      else tab.removeAttribute("aria-current");
+    });
+  };
+
+  const updateNextCta = () => {
+    const currentIndex = sceneIndex();
+    const revealed = sceneStates[activeScene].revealed;
+    nextButton.hidden = !revealed;
+    if (!revealed) return;
+    const nextSceneKey = WORKFLOW_SCENE_KEYS[currentIndex + 1];
+    nextButton.dataset.nextWorkflowScene = nextSceneKey || "";
+    nextButton.dataset.nextTarget = nextSceneKey ? "workflow" : "projects";
+    nextButton.textContent = nextSceneKey
+      ? `继续看：${WORKFLOW_SCENES[nextSceneKey].label} →`
+      : "继续看项目工坊 →";
+  };
+
+  const updateWorkflowChrome = () => {
+    updateChapterProgress();
+    updateNextCta();
+  };
+
+  const setScenePresentation = (sceneKey, animate = false, options = {}) => {
     const scene = WORKFLOW_SCENES[sceneKey];
-    const revealed = sceneStates[sceneKey].revealed;
     const apply = () => {
+      if (options.forceOld) sceneStates[sceneKey].revealed = false;
+      const revealed = sceneStates[sceneKey].revealed;
       activeScene = sceneKey;
       oldImage.src = scene.oldSrc;
       oldImage.alt = scene.oldAlt;
@@ -986,13 +1025,9 @@ function setupWorkflowMap() {
       else root.removeAttribute("aria-disabled");
       setState(revealed ? "revealed" : "idle");
       status.textContent = `当前展示${scene.label}的${revealed ? "AI 辅助" : "传统"}流程。`;
-      tabs.forEach((tab) => {
-        const selected = tab.dataset.workflowScene === sceneKey;
-        tab.classList.toggle("is-active", selected);
-        tab.setAttribute("aria-selected", String(selected));
-        tab.dataset.visited = String(sceneStates[tab.dataset.workflowScene].visited);
-      });
+      updateWorkflowChrome();
       requestAnimationFrame(() => root.classList.remove("is-scene-switching"));
+      if (!revealed) playHint();
     };
 
     if (!animate || reducedMotion.matches) {
@@ -1003,7 +1038,7 @@ function setupWorkflowMap() {
     sceneSwitchTimer = window.setTimeout(() => {
       apply();
       sceneSwitchTimer = 0;
-    }, 130);
+    }, 220);
   };
 
   const buildShards = (impact) => {
@@ -1043,13 +1078,13 @@ function setupWorkflowMap() {
     root.setAttribute("aria-disabled", "true");
     resetButton.hidden = false;
     status.textContent = `当前展示${WORKFLOW_SCENES[activeScene].label}的 AI 辅助流程。`;
-    tabs.find((tab) => tab.dataset.workflowScene === activeScene).dataset.visited = "true";
+    updateWorkflowChrome();
     buildCleanupTimer = window.setTimeout(() => root.classList.remove("is-building"), reducedMotion.matches ? 1 : 180);
   };
 
   const revealAiFlow = (event) => {
     if (!["idle", "hover", "hinting"].includes(state)) return;
-    userInteracted = true;
+    sceneStates[activeScene].hinted = true;
     clearHint();
     clearTransientTimers();
     const rect = root.getBoundingClientRect();
@@ -1078,24 +1113,28 @@ function setupWorkflowMap() {
     clearHint();
     clearTransientTimers();
     sceneStates[activeScene].revealed = false;
+    sceneStates[activeScene].visited = false;
     shardLayer.innerHTML = "";
     root.classList.remove("is-striking", "is-breaking", "is-building");
     setState("resetting");
     resetButton.hidden = true;
+    nextButton.hidden = true;
     oldLayer.removeAttribute("aria-hidden");
     aiLayer.setAttribute("aria-hidden", "true");
     root.removeAttribute("aria-disabled");
     root.setAttribute("aria-label", `点击敲碎${WORKFLOW_SCENES[activeScene].label}的传统流程，查看 AI 辅助流程`);
     status.textContent = `当前展示${WORKFLOW_SCENES[activeScene].label}的传统流程。`;
+    updateWorkflowChrome();
     resetTimer = window.setTimeout(() => setState("idle"), reducedMotion.matches ? 1 : 240);
     root.focus({ preventScroll: true });
   };
 
   const playHint = () => {
-    if (activeScene !== "prototype" || reducedMotion.matches || hasHinted || userInteracted || !sectionVisible || state !== "idle") return;
-    hasHinted = true;
+    const activeState = sceneStates[activeScene];
+    if (reducedMotion.matches || activeState.hinted || activeState.revealed || !sectionVisible || state !== "idle") return;
+    activeState.hinted = true;
     hintStartTimer = window.setTimeout(() => {
-      if (userInteracted || !sectionVisible || activeScene !== "prototype" || state !== "idle") return;
+      if (!sectionVisible || sceneStates[activeScene].revealed || state !== "idle") return;
       const rect = root.getBoundingClientRect();
       setLocalPosition(rect.width * .72, rect.height * .31);
       setState("hinting");
@@ -1103,16 +1142,42 @@ function setupWorkflowMap() {
     }, 1200);
   };
 
+  const switchScene = (sceneKey, options = {}) => {
+    if (!WORKFLOW_SCENE_KEYS.includes(sceneKey) || ["smashing", "resetting"].includes(state)) return false;
+    clearHint();
+    clearTransientTimers();
+    shardLayer.innerHTML = "";
+    root.classList.remove("is-striking", "is-breaking", "is-building");
+    setScenePresentation(sceneKey, true, options);
+    root.focus({ preventScroll: true });
+    return true;
+  };
+
+  const goToProjects = () => {
+    const projects = $("#projects");
+    if (!projects) return;
+    projects.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "start" });
+  };
+
+  const goToNextScene = () => {
+    const nextSceneKey = WORKFLOW_SCENE_KEYS[sceneIndex() + 1];
+    if (nextSceneKey) {
+      switchScene(nextSceneKey, { forceOld: true });
+      return;
+    }
+    goToProjects();
+  };
+
+  const goToPreviousScene = () => {
+    const previousSceneKey = WORKFLOW_SCENE_KEYS[sceneIndex() - 1];
+    if (previousSceneKey) switchScene(previousSceneKey);
+  };
+
   tabs.forEach((tab, index) => {
     tab.addEventListener("click", () => {
       const sceneKey = tab.dataset.workflowScene;
-      if (sceneKey === activeScene || ["smashing", "resetting"].includes(state)) return;
-      userInteracted = true;
-      clearHint();
-      clearTransientTimers();
-      shardLayer.innerHTML = "";
-      root.classList.remove("is-striking", "is-breaking", "is-building");
-      setScenePresentation(sceneKey, true);
+      if (sceneKey === activeScene) return;
+      switchScene(sceneKey);
     });
     tab.addEventListener("keydown", (event) => {
       if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
@@ -1124,14 +1189,14 @@ function setupWorkflowMap() {
 
   root.addEventListener("pointerenter", (event) => {
     if (!["idle", "hinting"].includes(state)) return;
-    userInteracted = true;
+    sceneStates[activeScene].hinted = true;
     clearHint();
     setPointerPosition(event.clientX, event.clientY);
     setState("hover");
   });
   root.addEventListener("pointermove", (event) => {
     if (!["idle", "hover", "hinting"].includes(state)) return;
-    userInteracted = true;
+    sceneStates[activeScene].hinted = true;
     clearHint();
     setPointerPosition(event.clientX, event.clientY);
     setState("hover");
@@ -1139,7 +1204,7 @@ function setupWorkflowMap() {
   root.addEventListener("pointerleave", () => state === "hover" && setState("idle"));
   root.addEventListener("focus", () => {
     if (state !== "idle") return;
-    userInteracted = true;
+    sceneStates[activeScene].hinted = true;
     clearHint();
     const rect = root.getBoundingClientRect();
     setLocalPosition(rect.width * .54, rect.height * .48);
@@ -1148,11 +1213,21 @@ function setupWorkflowMap() {
   root.addEventListener("blur", () => state === "hover" && setState("idle"));
   root.addEventListener("click", revealAiFlow);
   root.addEventListener("keydown", (event) => {
-    if (!["Enter", " "].includes(event.key)) return;
+    if (!["Enter", " ", "ArrowLeft", "ArrowRight"].includes(event.key)) return;
     event.preventDefault();
-    revealAiFlow();
+    if (event.key === "ArrowLeft") {
+      goToPreviousScene();
+      return;
+    }
+    if (event.key === "ArrowRight") {
+      if (state === "revealed") goToNextScene();
+      return;
+    }
+    if (state === "revealed") goToNextScene();
+    else revealAiFlow();
   });
   resetButton.addEventListener("click", resetFlow);
+  nextButton.addEventListener("click", goToNextScene);
 
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(([entry]) => {
