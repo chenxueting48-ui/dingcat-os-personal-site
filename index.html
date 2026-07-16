@@ -8,7 +8,7 @@
       content="DingCat OS：陈雪婷的个人空间，一个蓝黄白手绘风个人网站中保真原型。"
     />
     <title>DingCat OS | 陈雪婷的个人空间</title>
-    <link rel="stylesheet" href="./styles.css?v=project-archive-tabs-20260716" />
+    <link rel="stylesheet" href="./styles.css?v=background-atmosphere-20260716" />
   </head>
   <body>
     <nav class="dock-nav" aria-label="DingCat OS Dock 导航">
@@ -130,16 +130,20 @@
 
       <section id="life" class="screen life-screen" aria-labelledby="life-title">
         <div class="screen-heading">
-          <p class="eyebrow">Life Lab</p>
+          <p class="eyebrow">LIFE LAB</p>
           <h2 id="life-title">生活实验室</h2>
-          <p>这里不是项目列表，而是猫、运动、演唱会、审美和长期学习组成的拼贴墙。</p>
+          <p>不是项目列表，而是我的能量来源、审美输入和长期实验。</p>
         </div>
         <div class="life-board">
           <div id="lifeGrid" class="life-collage"></div>
           <button id="mbtiOpen" class="mbti-card" type="button">
-            <span>来猜猜我的 MBTI</span>
-            <strong>答案藏在这个网站的细节里</strong>
-            <small>点击开启</small>
+            <span class="mbti-tape" aria-hidden="true"></span>
+            <span class="mbti-paw" aria-hidden="true"></span>
+            <span class="mbti-mark" aria-hidden="true">?</span>
+            <span class="mbti-title">猜猜我的 MBTI</span>
+            <strong>答案藏在这个网站里。</strong>
+            <span class="mbti-blocks" aria-hidden="true"><i>E</i><i>N</i><i>T</i><i>J</i></span>
+            <small>开始猜</small>
           </button>
         </div>
       </section>
@@ -203,14 +207,27 @@
       <form method="dialog">
         <button class="modal-close" aria-label="关闭 MBTI 彩蛋">×</button>
       </form>
-      <p class="eyebrow">隐藏人格测试</p>
-      <h2>来猜猜我的 MBTI</h2>
-      <p>答案藏在网站细节里，可以去项目页、AI 链路、阿比猫提示里找线索。</p>
-      <div id="mbtiLetters" class="mbti-picker"></div>
-      <button id="mbtiSubmit" class="primary-button" type="button" disabled>提交答案</button>
-      <div id="mbtiFeedback" class="mbti-feedback" role="status"></div>
+      <div id="mbtiGame" class="mbti-game">
+        <p class="eyebrow">MBTI EASTER EGG</p>
+        <h2>猜猜我的 MBTI</h2>
+        <p>四个字母都可以点，答案藏在这个网站的细节里。</p>
+        <div id="mbtiLetters" class="mbti-picker"></div>
+        <div class="mbti-submit-row">
+          <button id="mbtiSubmit" class="primary-button" type="button" disabled>提交答案</button>
+          <span class="mbti-submit-tip">四个字母都要选完喔</span>
+        </div>
+        <div id="mbtiFeedback" class="mbti-feedback" role="status"></div>
+      </div>
+      <div id="mbtiSuccess" class="mbti-success" hidden>
+        <span class="mbti-success-sticker" aria-hidden="true"></span>
+        <p class="eyebrow">MBTI EASTER EGG</p>
+        <h2>答对了，是 ENTJ</h2>
+        <p>更准确地说：喜欢拆复杂问题，习惯把混乱流程整理成可推进的方案。</p>
+        <small>不是爱管人，是看不得流程乱成一锅粥。</small>
+        <button id="mbtiClose" class="primary-button" type="button">收下答案</button>
+      </div>
     </dialog>
 
-    <script src="./app.js?v=project-archive-tabs-20260716"></script>
+    <script src="./app.js?v=mbti-easter-egg-20260716"></script>
   </body>
 </html>

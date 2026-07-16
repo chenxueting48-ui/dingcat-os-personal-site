@@ -282,12 +282,42 @@ const data = {
     },
   ],
   life: [
-    ["阿比西尼亚猫", "高能观察员，也是 DingCat OS 的灵感来源。"],
-    ["运动 / 健身", "用规律运动补充体力和执行力。"],
-    ["演唱会", "收集真实情绪、现场节奏和能量。"],
-    ["审美收集", "界面、插画、字体、配色、小物件都进灵感库。"],
-    ["个人网站搭建", "把自己也当成一个长期迭代的产品。"],
-    ["长期学习", "持续整理方法论、工具链和产品判断。"],
+    {
+      kind: "aby",
+      title: "阿比西尼亚猫 Aby",
+      desc: "DingCat OS 的灵感来源，也是我的高能观察员。",
+      note: "灵感来源确认",
+    },
+    {
+      kind: "sport",
+      title: "运动 / 健身",
+      desc: "用规律训练补充体力，也训练执行力。",
+      note: "今日能量 +1",
+    },
+    {
+      kind: "concert",
+      title: "演唱会",
+      desc: "收集现场情绪、节奏和能量。",
+      note: "现场能量已收集",
+    },
+    {
+      kind: "aesthetic",
+      title: "审美收集",
+      desc: "配色、字体、插画和小物件，都会进入灵感库。",
+      note: "灵感已入库",
+    },
+    {
+      kind: "site",
+      title: "个人网站搭建",
+      desc: "把自己也当成一个长期迭代的产品。",
+      note: "持续迭代中",
+    },
+    {
+      kind: "learning",
+      title: "长期学习",
+      desc: "持续整理方法论，也持续更新自己的判断力。",
+      note: "判断力升级中",
+    },
   ],
 };
 
@@ -306,12 +336,18 @@ function lockPageForModal() {
 
 function unlockPageForModal() {
   if (document.querySelector("dialog[open]")) return;
+  const html = document.documentElement;
+  html.classList.add("is-restoring-scroll");
   document.body.classList.remove("modal-locked");
   document.body.style.top = "";
   [$(".page-flow"), $(".dock-nav")].filter(Boolean).forEach((element) => {
     element.inert = false;
   });
-  window.scrollTo(0, lockedScrollY);
+  window.scrollTo({ top: lockedScrollY, left: 0, behavior: "auto" });
+  requestAnimationFrame(() => {
+    window.scrollTo({ top: lockedScrollY, left: 0, behavior: "auto" });
+    requestAnimationFrame(() => html.classList.remove("is-restoring-scroll"));
+  });
 }
 
 function openModal(modal) {
@@ -1301,16 +1337,87 @@ function renderProjects() {
 }
 
 function renderLife() {
-  $("#lifeGrid").innerHTML = data.life
+  const grid = $("#lifeGrid");
+  if (!grid) return;
+  grid.innerHTML = data.life
     .map(
-      ([title, desc]) => `
-        <article class="life-item">
-          <strong>${title}</strong>
-          <p>${desc}</p>
+      (item, index) => `
+        <article class="life-item life-item-${item.kind}" data-life-kind="${item.kind}" data-life-index="${index}">
+          <span class="life-tape" aria-hidden="true"></span>
+          <div class="life-visual" aria-hidden="true">
+            ${lifeVisualTemplate(item.kind)}
+          </div>
+          <div class="life-copy">
+            <strong>${item.title}</strong>
+            <p>${item.desc}</p>
+          </div>
+          <small class="life-hover-note">${item.note}</small>
+          ${item.kind === "aby" ? '<span class="life-clue">她好像很爱规划。</span>' : ""}
         </article>
       `
     )
     .join("");
+
+  setupLifeEasterEgg(grid);
+}
+
+function lifeVisualTemplate(kind) {
+  const templates = {
+    aby: `
+      <img class="life-aby-img" src="./assets/aby-cat-cutout.png" alt="">
+      <span class="life-bubble">喵？</span>
+      <span class="life-bell"></span>
+      <span class="life-paw"></span>
+    `,
+    sport: `
+      <span class="life-shoe"></span>
+      <span class="life-dumbbell"></span>
+      <span class="life-ticket">CHECK</span>
+      <span class="life-energy"><i></i><i></i><i></i></span>
+    `,
+    concert: `
+      <span class="life-concert-ticket">LIVE</span>
+      <span class="life-glowstick"></span>
+      <span class="life-music-line"></span>
+      <span class="life-stage-light"></span>
+    `,
+    aesthetic: `
+      <span class="life-swatches"><i></i><i></i><i></i></span>
+      <span class="life-font-strip">Aa</span>
+      <span class="life-camera"></span>
+      <span class="life-folder-mini"></span>
+    `,
+    site: `
+      <span class="life-browser-window"></span>
+      <span class="life-cursor"></span>
+      <span class="life-os-label">DingCat OS</span>
+      <span class="life-folder-tab"></span>
+    `,
+    learning: `
+      <span class="life-book"></span>
+      <span class="life-note-lines"></span>
+      <span class="life-ai-label">AI</span>
+      <span class="life-checklist"></span>
+    `,
+  };
+  return templates[kind] || "";
+}
+
+function setupLifeEasterEgg(grid) {
+  const abyCard = grid.querySelector('[data-life-kind="aby"]');
+  if (!abyCard) return;
+  let clicks = 0;
+  let clueTimer;
+  abyCard.addEventListener("click", () => {
+    clicks += 1;
+    if (clicks < 3) return;
+    clicks = 0;
+    abyCard.classList.add("show-clue");
+    window.clearTimeout(clueTimer);
+    clueTimer = window.setTimeout(() => {
+      abyCard.classList.remove("show-clue");
+    }, 2200);
+  });
 }
 
 function setupProjects() {
@@ -1485,22 +1592,40 @@ function setupMbti() {
     ["J", "P"],
   ];
   const state = ["?", "?", "?", "?"];
+  const wrongHints = [
+    "再看看：首页和 AI 工作流里有线索。",
+    "她更像会拆流程、定计划、推落地的人。",
+    "猫都看不下去了：答案很接近 ENTJ。",
+  ];
   const picker = $("#mbtiLetters");
   const submit = $("#mbtiSubmit");
   const feedback = $("#mbtiFeedback");
+  const game = $("#mbtiGame");
+  const success = $("#mbtiSuccess");
+  const modal = $("#mbtiModal");
+  const close = $("#mbtiClose");
+  let wrongCount = 0;
 
   function render() {
     picker.innerHTML = groups
       .map(
         (group, index) => `
-          <button class="mbti-letter" type="button" data-index="${index}">
-            ${state[index]}
-            <small>${group.join("/")}</small>
+          <button
+            class="mbti-letter ${state[index] !== "?" ? "is-selected" : ""}"
+            type="button"
+            data-index="${index}"
+            aria-label="选择 ${group.join(" 或 ")}"
+          >
+            <span class="mbti-choice ${state[index] === group[0] ? "is-active" : ""}">${group[0]}</span>
+            <span class="mbti-divider">/</span>
+            <span class="mbti-choice ${state[index] === group[1] ? "is-active" : ""}">${group[1]}</span>
+            <small>${state[index] === "?" ? "点击选择" : "再点切换"}</small>
           </button>
         `
       )
       .join("");
     submit.disabled = state.includes("?");
+    submit.setAttribute("aria-disabled", String(submit.disabled));
   }
 
   picker.addEventListener("click", (event) => {
@@ -1515,17 +1640,27 @@ function setupMbti() {
   });
 
   $("#mbtiOpen").addEventListener("click", () => {
+    game.hidden = false;
+    success.hidden = true;
     openModal($("#mbtiModal"));
   });
 
   submit.addEventListener("click", () => {
+    if (submit.disabled) return;
     const answer = state.join("");
     const correct = answer === "ENTJ";
-    feedback.className = `mbti-feedback ${correct ? "correct" : "wrong"}`;
-    feedback.textContent = correct
-      ? "猜对啦。ENTJ 线索：目标导向、结构拆解、推进落地、持续复盘，都藏在这个 OS 的细节里。"
-      : `你猜的是 ${answer}。差一点，可以回项目页和 AI 链路再找找线索：目标感、拆解力、执行推进、系统化沉淀。`;
+    if (correct) {
+      game.hidden = true;
+      success.hidden = false;
+      window.setTimeout(() => close?.focus({ preventScroll: true }), 0);
+      return;
+    }
+    wrongCount += 1;
+    feedback.className = "mbti-feedback hint";
+    feedback.textContent = wrongHints[Math.min(wrongCount, wrongHints.length) - 1];
   });
+
+  close?.addEventListener("click", () => closeModalWithAnimation(modal));
 
   render();
 }
@@ -1628,6 +1763,7 @@ function setupNav() {
       if (!visible) return;
       links.forEach((link) => link.classList.toggle("active", link.dataset.nav === visible.target.id));
       dock?.classList.toggle("is-compact", visible.target.id !== "welcome");
+      dock?.classList.toggle("is-life-screen", visible.target.id === "life");
     },
     { rootMargin: "-25% 0px -45% 0px", threshold: [0.1, 0.35, 0.6] }
   );
