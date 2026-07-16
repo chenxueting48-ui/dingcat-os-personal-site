@@ -5,41 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="DingCat OS：陈雪婷的个人空间，一个蓝黄白手绘风个人网站中保真原型。"
+      content="DingCat OS：陈雪婷的个人空间，展示产品经验、AI 工作流、真实项目和生活切面。"
     />
     <title>DingCat OS | 陈雪婷的个人空间</title>
-    <link rel="stylesheet" href="./styles.css?v=background-atmosphere-20260716" />
+    <link rel="stylesheet" href="./styles.css?v=decor-layer-20260717" />
   </head>
   <body>
     <nav class="dock-nav" aria-label="DingCat OS Dock 导航">
       <a href="#welcome" class="nav-item active" data-nav="welcome">
         <span class="dock-icon dock-home" aria-hidden="true"></span>
-        <small>欢迎</small>
+        <small data-mobile-label="首页">欢迎</small>
       </a>
       <a href="#experience" class="nav-item" data-nav="experience">
         <span class="dock-icon dock-about" aria-hidden="true"></span>
-        <small>关于我</small>
+        <small data-mobile-label="经历">关于我</small>
       </a>
       <a href="#workflow" class="nav-item" data-nav="workflow">
         <span class="dock-icon dock-ai" aria-hidden="true"></span>
-        <small>AI 链路</small>
+        <small data-mobile-label="AI">AI 链路</small>
       </a>
       <a href="#projects" class="nav-item" data-nav="projects">
         <span class="dock-icon dock-projects" aria-hidden="true"></span>
-        <small>项目</small>
+        <small data-mobile-label="项目">项目</small>
       </a>
       <a href="#life" class="nav-item" data-nav="life">
         <span class="dock-icon dock-life" aria-hidden="true"></span>
-        <small>生活</small>
+        <small data-mobile-label="生活">生活</small>
       </a>
       <a href="#contact" class="nav-item" data-nav="contact">
         <span class="dock-icon dock-contact" aria-hidden="true"></span>
-        <small>联系</small>
+        <small data-mobile-label="联系">联系</small>
       </a>
     </nav>
 
     <main class="page-flow">
       <section id="welcome" class="screen welcome-screen" aria-labelledby="welcome-title">
+        <div class="section-decor welcome-decor" aria-hidden="true">
+          <img class="decor welcome-star decor-float" src="./assets/decor/star-yellow.png" alt="" draggable="false" />
+          <img class="decor welcome-dots" src="./assets/decor/dots-blue.png" alt="" draggable="false" />
+          <img class="decor welcome-paw decor-float-slow" src="./assets/decor/paw-blue.png" alt="" draggable="false" />
+          <img class="decor welcome-wave" src="./assets/decor/wave-blue.png" alt="" draggable="false" />
+          <img class="decor welcome-rays" src="./assets/decor/rays-blue.png" alt="" draggable="false" />
+        </div>
+        <div class="mobile-os-mark" aria-hidden="true"><span></span>DingCat OS</div>
         <div class="welcome-center">
           <div class="title-field">
             <canvas id="particleText" aria-hidden="true"></canvas>
@@ -68,6 +76,13 @@
       </section>
 
       <section id="experience" class="screen experience-screen" aria-labelledby="experience-title">
+        <div class="section-decor experience-decor" aria-hidden="true">
+          <img class="decor experience-star decor-float" src="./assets/decor/star-yellow.png" alt="" draggable="false" />
+          <img class="decor experience-dots-left" src="./assets/decor/dots-blue.png" alt="" draggable="false" />
+          <img class="decor experience-dots-right" src="./assets/decor/dots-blue.png" alt="" draggable="false" />
+          <img class="decor experience-curve" src="./assets/decor/wave-blue.png" alt="" draggable="false" />
+          <img class="decor experience-arrow" src="./assets/decor/arrow-blue.png" alt="" draggable="false" />
+        </div>
         <div class="screen-heading">
           <p class="eyebrow">About / Experience</p>
           <h2 id="experience-title">我的产品经理成长轨迹</h2>
@@ -75,18 +90,25 @@
         </div>
         <div id="timeline" class="timeline"></div>
         <div class="capability-evolution" aria-label="能力沉淀线">
-          <p>这些经历沉淀成我的产品能力路径</p>
+          <p>这些经历沉淀成我的产品能力证据链</p>
           <div class="capability-line">
-            <span class="capability-node data-node" data-tooltip="从数据表、交易流程和后台系统理解业务闭环"><strong>数据与交易链路</strong><small>理解业务闭环</small></span>
-            <span class="capability-node web-node" data-tooltip="将活动规则、页面状态和增长入口落成页面"><strong>官网与活动搭建</strong><small>推动页面落地</small></span>
-            <span class="capability-node flow-node" data-tooltip="在多项目并行中管理节奏和优先级"><strong>多业务线推进</strong><small>协调复杂节奏</small></span>
-            <span class="capability-node check-node" data-tooltip="把重复经验整理成模板和 checklist"><strong>标准化沉淀</strong><small>复用交付经验</small></span>
-            <span class="capability-node ai-node" data-tooltip="用 AI 承接信息整理、文档生成和复盘沉淀"><strong>AI 工作流提效</strong><small>放大产品效率</small></span>
+            <span class="capability-node data-node" data-tooltip="从数据表、交易流程和后台系统理解业务闭环"><strong>数据与交易链路</strong><small>BI 数据平台 / 小程序商城 / 交易闭环</small></span>
+            <span class="capability-node web-node" data-tooltip="将活动规则、页面状态和增长入口落成页面"><strong>官网与活动落地</strong><small>官网搭建 / 活动页面 / 增长玩法</small></span>
+            <span class="capability-node flow-node" data-tooltip="在多项目并行中管理节奏和优先级"><strong>多业务线推进</strong><small>8 条游戏线 / 7 条业务线 / 多项目并行</small></span>
+            <span class="capability-node check-node" data-tooltip="把重复经验整理成模板和 checklist"><strong>标准化沉淀</strong><small>玩法说明 / 配置模板 / 上线 checklist</small></span>
+            <span class="capability-node ai-node" data-tooltip="用 AI 承接信息整理、文档生成和复盘沉淀"><strong>AI 工作流提效</strong><small>提示词库 / 同步文档 / 复盘沉淀</small></span>
           </div>
         </div>
       </section>
 
       <section id="workflow" class="screen workflow-screen" aria-labelledby="workflow-title">
+        <div class="section-decor workflow-decor" aria-hidden="true">
+          <img class="decor workflow-rays-left" src="./assets/decor/rays-blue.png" alt="" draggable="false" />
+          <img class="decor workflow-rays-right" src="./assets/decor/rays-blue.png" alt="" draggable="false" />
+          <img class="decor workflow-arrow" src="./assets/decor/arrow-blue.png" alt="" draggable="false" />
+          <img class="decor workflow-dots" src="./assets/decor/dots-blue.png" alt="" draggable="false" />
+          <img class="decor workflow-plane decor-float-slow" src="./assets/decor/paper-plane.png" alt="" draggable="false" />
+        </div>
         <div class="screen-heading">
           <p class="eyebrow">AI Workflow</p>
           <h2 id="workflow-title">我是如何用 AI 重做产品工作流程</h2>
@@ -113,6 +135,8 @@
             aria-label="点击敲碎传统原型交付流程，查看 AI 辅助原型流程"
             aria-describedby="prototypeDeliveryStatus"
           ></div>
+          <p class="prototype-mobile-scroll-hint" aria-hidden="true">左右滑动查看完整流程</p>
+          <button id="prototypeMobileSmash" class="prototype-mobile-smash" type="button">敲碎旧流程</button>
           <button id="prototypeReset" class="prototype-reset" type="button" hidden>↺ 旧流程</button>
           <button id="workflowNext" class="workflow-next" type="button" hidden>继续看：同步文档 →</button>
           <p id="prototypeDeliveryStatus" class="sr-only" aria-live="polite">当前展示传统原型交付流程。</p>
@@ -120,8 +144,15 @@
       </section>
 
       <section id="projects" class="screen projects-screen" aria-labelledby="projects-title">
+        <div class="section-decor projects-decor" aria-hidden="true">
+          <img class="decor projects-folder" src="./assets/decor/folder-yellow.png" alt="" draggable="false" />
+          <img class="decor projects-dots-left" src="./assets/decor/dots-blue.png" alt="" draggable="false" />
+          <img class="decor projects-dots-right" src="./assets/decor/dots-blue.png" alt="" draggable="false" />
+          <img class="decor projects-arrow" src="./assets/decor/arrow-blue.png" alt="" draggable="false" />
+          <img class="decor projects-wave" src="./assets/decor/wave-blue.png" alt="" draggable="false" />
+        </div>
         <div class="screen-heading">
-          <p class="eyebrow">PROJECT WORKSHOP</p>
+          <p class="eyebrow">CASE FILES / PROJECT WORKSHOP</p>
           <h2 id="projects-title">项目工坊</h2>
           <p>把真实落地过的产品项目，收进一个个可打开的项目档案里。</p>
         </div>
@@ -129,6 +160,14 @@
       </section>
 
       <section id="life" class="screen life-screen" aria-labelledby="life-title">
+        <div class="section-decor life-decor" aria-hidden="true">
+          <img class="decor life-star decor-float" src="./assets/decor/star-yellow.png" alt="" draggable="false" />
+          <img class="decor life-bubble" src="./assets/decor/bubble.png" alt="" draggable="false" />
+          <img class="decor life-rays" src="./assets/decor/rays-blue.png" alt="" draggable="false" />
+          <img class="decor life-tape-blue" src="./assets/decor/tape-blue.png" alt="" draggable="false" />
+          <img class="decor life-tape-yellow" src="./assets/decor/tape-yellow.png" alt="" draggable="false" />
+          <img class="decor life-paw decor-float-slow" src="./assets/decor/paw-blue.png" alt="" draggable="false" />
+        </div>
         <div class="screen-heading">
           <p class="eyebrow">LIFE LAB</p>
           <h2 id="life-title">生活实验室</h2>
@@ -149,22 +188,51 @@
       </section>
 
       <section id="contact" class="screen contact-screen" aria-labelledby="contact-title">
+        <div class="section-decor contact-decor" aria-hidden="true">
+          <img class="decor contact-plane decor-float-slow" src="./assets/decor/paper-plane.png" alt="" draggable="false" />
+          <img class="decor contact-dots" src="./assets/decor/dots-blue.png" alt="" draggable="false" />
+          <img class="decor contact-wave" src="./assets/decor/wave-blue.png" alt="" draggable="false" />
+          <img class="decor contact-bubble" src="./assets/decor/bubble.png" alt="" draggable="false" />
+          <img class="decor contact-star decor-float" src="./assets/decor/star-yellow.png" alt="" draggable="false" />
+        </div>
         <div class="contact-copy">
           <p class="eyebrow">Contact</p>
-          <h2 id="contact-title">欢迎来聊真实问题、复杂流程和能落地的 AI 应用</h2>
+          <h2 id="contact-title">一起把复杂问题<br />做成可落地的产品</h2>
+          <p class="contact-intro">欢迎交流 AI 产品落地、复杂业务流程拆解、游戏活动与平台产品。</p>
           <div class="talk-topics">
-            <span>AI 产品经理机会</span>
-            <span>工具型产品</span>
-            <span>游戏活动与平台产品</span>
-            <span>AI 工作流提效</span>
-            <span>复杂业务流程拆解</span>
+            <span>AI 产品落地</span>
+            <span>复杂流程拆解</span>
+            <span>游戏活动 / 平台产品</span>
           </div>
-          <div class="contact-grid">
-            <a href="mailto:xueting_chen@dingcat.com"><b>Email</b><span>xueting_chen@dingcat.com</span></a>
-            <a href="#" aria-label="微信占位"><b>微信</b><span>DingCat_Kitty</span></a>
-            <a href="#" aria-label="GitHub 占位"><b>GitHub</b><span>待补充</span></a>
-            <a href="#" aria-label="Portfolio 占位"><b>Portfolio</b><span>作品集入口</span></a>
-            <a href="#" aria-label="其他社交链接占位"><b>社交链接</b><span>待补充</span></a>
+          <div class="contact-grid" aria-label="联系方式">
+            <button
+              class="contact-copy-card"
+              type="button"
+              data-copy-value="913547109@qq.com"
+              data-copy-success="邮箱已复制"
+              aria-label="复制邮箱 913547109@qq.com"
+            >
+              <span class="contact-card-copy">
+                <b>Email</b>
+                <strong>913547109@qq.com</strong>
+                <small>点击复制</small>
+              </span>
+              <span class="contact-entry-icon contact-email-icon" aria-hidden="true"><i></i></span>
+            </button>
+            <button
+              class="contact-copy-card"
+              type="button"
+              data-copy-value="c913547109"
+              data-copy-success="微信号已复制"
+              aria-label="复制微信号 c913547109"
+            >
+              <span class="contact-card-copy">
+                <b>微信</b>
+                <strong>c913547109</strong>
+                <small>点击复制</small>
+              </span>
+              <span class="contact-entry-icon contact-wechat-icon" aria-hidden="true"><i></i></span>
+            </button>
           </div>
         </div>
         <div class="desk-scene" aria-hidden="true">
@@ -173,13 +241,15 @@
           <span class="desk-object folder-stack"></span>
           <div class="mail-window">
             <span class="mail-title">DingCat Mail</span>
-            <p>真实问题进入收件箱</p>
-            <p>复杂流程拆成路线图</p>
-            <p>AI 应用落到工作链路</p>
+            <small>你可以找我聊：</small>
+            <p><b>AI 产品落地</b><span>从业务问题拆到可执行方案。</span></p>
+            <p><b>复杂流程拆解</b><span>把混乱链路整理成流程图、PRD 和检查清单。</span></p>
+            <p><b>游戏活动 / 平台产品</b><span>聊活动链路、支付、数据口径和上线协作。</span></p>
           </div>
           <img src="./assets/aby-cat-floating.png" alt="" />
-          <span class="desk-note">Let's build something useful.</span>
+          <span class="desk-note"><b>Build something useful.</b><small>做点真正有用的东西。</small></span>
         </div>
+        <div id="contactToast" class="contact-toast" role="status" aria-live="polite"></div>
       </section>
     </main>
 
@@ -228,6 +298,6 @@
       </div>
     </dialog>
 
-    <script src="./app.js?v=mbti-easter-egg-20260716"></script>
+    <script src="./app.js?v=decor-layer-20260717"></script>
   </body>
 </html>

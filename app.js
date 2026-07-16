@@ -6,8 +6,11 @@ const data = {
       title: "B 端产品与数据平台设计",
       meta: "2022.09 - 2023.12｜北京兴长信达｜产品助理",
       background: "品牌数字化服务场景，围绕 BI 数据平台、小程序商城、经销商后台推进产品落地。",
+      positioning: "从 B 端数据平台和小程序商城开始，理解数据、交易和后台系统如何支撑业务决策。",
+      problem: "品牌方数据、交易和运营链路分散，需要通过数据平台、商城和后台工具提升业务管理效率。",
+      actions: ["参与 BI 数据平台、小程序商城和经销商后台设计", "梳理数据分析、用户转化与交易流程", "参与浏览、支付、订单、物流与售后闭环设计"],
       tags: ["BI 数据平台", "小程序商城", "交易链路"],
-      summary: "参与信达 BI 平台 0-1 落地，整合 250+ 数据表能力，服务 20+ 品牌。",
+      summary: "整合 250+ 数据表能力，服务 20+ 品牌，沉淀完整交易闭环理解。",
       detail: {
         label: "01｜链路理解",
         intro: "从 B 端数据平台和小程序商城开始，理解数据、交易和后台系统如何支撑业务决策。",
@@ -30,8 +33,11 @@ const data = {
       title: "游戏官网与网页活动落地",
       meta: "2024.04 - 2024.09｜莉莉丝｜产品经理 / 广告技术组",
       background: "游戏业务官网与网页活动场景，覆盖官网搭建、人拉人裂变、CBT 招募、预约及常规活动。",
+      positioning: "从游戏官网和网页活动切入，处理活动玩法、页面状态、增长入口和上线协作。",
+      problem: "游戏官网和活动页面需要快速迭代，活动玩法、页面状态和上线协作复杂。",
+      actions: ["推进公司游戏官网搭建与迭代", "支持裂变、CBT 招募、预约与常规活动落地", "沉淀活动查数、TDK、社媒分享与防刷文档"],
       tags: ["游戏官网", "裂变活动", "工具沉淀"],
-      summary: "搭建 / 迭代网页活动 30+ 个，负责 8 条游戏线、48 个官网。",
+      summary: "搭建 / 迭代网页活动 30+，负责 8 条游戏线、48 个官网搭建与迭代。",
       detail: {
         label: "02｜活动落地",
         intro: "从游戏官网和网页活动切入，高频处理活动玩法、页面状态、增长入口和上线协作。",
@@ -55,8 +61,11 @@ const data = {
       title: "海外网页活动与规模化交付",
       meta: "2024.09 - 至今｜沐瞳｜Web 产品经理",
       background: "海外 & 国内游戏官网及网页活动场景，覆盖需求承接、活动落地、上线复盘与玩法优化。",
+      positioning: "在多业务线、多地区、多活动并行场景里，沉淀规模化交付和标准化协作能力。",
+      problem: "海内外网页活动并行推进，需求、搭建、联调、测试上线和数据复盘容易割裂。",
+      actions: ["承接海内外游戏官网及网页活动并推动落地", "主导评审、搭建、联调、验收、发布与复盘", "沉淀玩法说明、配置模板和上线 checklist"],
       tags: ["海外活动", "多业务线", "标准化沉淀"],
-      summary: "独立交付 30+ 海外活动项目，并行支持 7 条业务线，累计 PV 超 1.6 亿。",
+      summary: "独立交付 30+ 海外活动项目，并行支持 7 条业务线，累计 PV 超 1.6 亿，需求满意度 95%。",
       detail: {
         label: "03｜规模交付",
         intro: "负责海外与国内网页活动完整闭环，从需求承接到上线复盘，支撑多业务线规模化交付。",
@@ -183,7 +192,10 @@ const data = {
       type: "Commerce",
       icon: "commerce",
       summary: "从商品展示、支付订单到私域转化，搭建交易闭环。",
-      tags: ["交易链路", "私域转化", "后台配置"],
+      problem: "活动与商城场景需要把商品展示、下单支付、转化归因和数据复盘串成闭环。",
+      keyAction: "梳理 C 端购买链路、支付状态、归因逻辑、后台配置项和数据复盘口径。",
+      archiveResult: "形成从商品展示、下单支付、归因统计到运营复盘的轻商城交易闭环。",
+      tags: ["商城链路", "支付状态", "归因口径", "后台配置"],
       metrics: [["40w+", "用户"], ["1000+", "日活"], ["60%", "次留"]],
       detail: {
         positioning: "围绕品牌私域转化与游戏 KOC 商城场景，搭建从商品展示、下单支付、订单流转到数据复盘的交易链路。",
@@ -211,7 +223,10 @@ const data = {
       type: "AI Workflow",
       icon: "ai",
       summary: "把网页活动从需求输入到上线复盘，拆成可复用的 AI 提效流程。",
-      tags: ["AI 工作流", "提示词", "SOP"],
+      problem: "网页活动需求输入分散、文档重复、检查链路长，容易遗漏信息。",
+      keyAction: "把需求提取、同步文档、埋点、提测检查、LQA、压测、发布检查和复盘拆成可复用 AI 工作流。",
+      archiveResult: "沉淀提示词库、SOP、字段规范、检查清单和回归测试方案。",
+      tags: ["AI 工作流", "提示词", "SOP", "质量检查"],
       metrics: [["10+", "环节"], ["3 个", "场景"], ["可复用", "提示词"]],
       detail: {
         positioning: "这不是一个单点工具，而是一套把 AI 嵌进产品经理工作链路的提效系统。",
@@ -239,7 +254,10 @@ const data = {
       type: "Data Platform",
       icon: "data",
       summary: "整合多平台数据，支撑品牌数字化决策。",
-      tags: ["BI 平台", "数据看板", "监控预警"],
+      problem: "品牌方数据分散在多个渠道，业务侧难以及时查看销售、转化和运营数据。",
+      keyAction: "参与 BI 数据平台需求梳理，梳理数据看板、权限、指标、预警和分析场景。",
+      archiveResult: "整合 250+ 数据表能力，服务 20+ 品牌，沉淀数据平台产品理解。",
+      tags: ["BI 平台", "数据看板", "权限体系", "监控预警"],
       metrics: [["250+", "数据表"], ["20+", "品牌"], ["41 个", "分析场景"]],
       detail: {
         positioning: "将多平台数据能力产品化，支撑品牌客户与不同角色进行数字化决策。",
@@ -267,7 +285,10 @@ const data = {
       type: "Growth",
       icon: "growth",
       summary: "通过复合玩法提升海外玩家参与与传播。",
-      tags: ["促活", "裂变", "数据复盘"],
+      problem: "游戏活动需要通过任务、积分、抽奖和邀请机制提升玩家参与和传播。",
+      keyAction: "设计活动页面链路、任务规则、奖励状态、数据埋点和上线协作流程。",
+      archiveResult: "支撑活动曝光、参与和数据复盘，沉淀活动玩法与增长链路经验。",
+      tags: ["促活", "任务体系", "奖励状态", "数据埋点"],
       metrics: [["5223w+", "PV"], ["664w+", "UV"], ["139w+", "参与玩家"]],
       detail: {
         positioning: "面向缅甸区域 MM 玩家设计促活专题活动，通过任务、积分、抽奖和邀请回流提升参与与传播。",
@@ -322,6 +343,7 @@ const data = {
 };
 
 const $ = (selector) => document.querySelector(selector);
+const mobileViewport = () => window.matchMedia("(max-width: 768px)").matches;
 let lockedScrollY = 0;
 
 function lockPageForModal() {
@@ -410,9 +432,12 @@ function renderTimeline() {
             </div>
             <h3>${item.title}</h3>
             <p class="timeline-meta">${item.meta}</p>
-            <div class="timeline-tags">${item.tags.map((tag) => `<span>${tag}</span>`).join("")}</div>
-            <p class="timeline-outcome"><b>代表成果</b><span>${item.summary}</span></p>
-            <button class="timeline-detail-trigger" type="button" data-experience="${index}">查看详情</button>
+            <p class="timeline-positioning">${item.positioning}</p>
+            <div class="timeline-proof timeline-problem"><b>我解决的问题</b><span>${item.problem}</span></div>
+            <div class="timeline-proof timeline-actions"><b>关键动作</b><ul>${item.actions.map((action) => `<li>${action}</li>`).join("")}</ul></div>
+            <div class="timeline-mobile-skills"><b>能力沉淀</b><div>${item.detail.abilities.map((ability) => `<span>${ability}</span>`).join("")}</div></div>
+            <p class="timeline-outcome"><b>结果 / 沉淀</b><span>${item.summary}</span></p>
+            <button class="timeline-detail-trigger" type="button" data-experience="${index}" aria-expanded="false">查看详情</button>
           </div>
         </article>
       `
@@ -517,7 +542,25 @@ function setupExperienceDetails() {
 
   document.addEventListener("click", (event) => {
     const button = event.target.closest("[data-experience]");
-    if (!button) return;
+    if (!button || !timeline?.contains(button)) return;
+    if (mobileViewport()) {
+      const item = button.closest(".timeline-item");
+      if (!item) return;
+      const shouldOpen = !item.classList.contains("is-mobile-expanded");
+      timeline.querySelectorAll(".timeline-item").forEach((candidate) => {
+        candidate.classList.remove("is-mobile-expanded");
+        const trigger = candidate.querySelector(".timeline-detail-trigger");
+        trigger?.setAttribute("aria-expanded", "false");
+        if (trigger) trigger.textContent = "查看详情";
+      });
+      if (shouldOpen) {
+        item.classList.add("is-mobile-expanded");
+        const trigger = item.querySelector(".timeline-detail-trigger");
+        trigger?.setAttribute("aria-expanded", "true");
+        if (trigger) trigger.textContent = "收起详情";
+      }
+      return;
+    }
     lastTrigger = button;
     renderExperience(Number(button.dataset.experience));
     openModal(modal);
@@ -927,6 +970,7 @@ function renderWorkflow() {
   const initial = WORKFLOW_SCENES.prototype;
 
   root.innerHTML = `
+    <span class="prototype-mobile-scroll-track" aria-hidden="true"></span>
     <div class="prototype-layer prototype-ai-layer" aria-hidden="true">
       <img class="prototype-flow-art" src="${initial.aiSrc}" alt="${initial.aiAlt}" draggable="false" />
     </div>
@@ -949,10 +993,11 @@ function setupWorkflowMap() {
   const root = $("#prototypeDelivery");
   const resetButton = $("#prototypeReset");
   const nextButton = $("#workflowNext");
+  const mobileSmashButton = $("#prototypeMobileSmash");
   const progress = $("#workflowProgress");
   const status = $("#prototypeDeliveryStatus");
   const tabs = [...document.querySelectorAll("[data-workflow-scene]")];
-  if (!section || !root || !resetButton || !nextButton || !progress || !status || tabs.length === 0) return;
+  if (!section || !root || !resetButton || !nextButton || !mobileSmashButton || !progress || !status || tabs.length === 0) return;
 
   const oldLayer = root.querySelector(":scope > .prototype-legacy-layer");
   const aiLayer = root.querySelector(":scope > .prototype-ai-layer");
@@ -1059,9 +1104,17 @@ function setupWorkflowMap() {
       : "继续看项目工坊 →";
   };
 
+  const updateMobileSmash = () => {
+    const revealed = sceneStates[activeScene].revealed;
+    mobileSmashButton.hidden = revealed;
+    mobileSmashButton.disabled = ["smashing", "resetting"].includes(state);
+    mobileSmashButton.textContent = state === "smashing" ? "正在重做流程…" : "敲碎旧流程";
+  };
+
   const updateWorkflowChrome = () => {
     updateChapterProgress();
     updateNextCta();
+    updateMobileSmash();
   };
 
   const setScenePresentation = (sceneKey, animate = false, options = {}) => {
@@ -1152,12 +1205,13 @@ function setupWorkflowMap() {
       ? setPointerPosition(event.clientX, event.clientY)
       : setLocalPosition(rect.width * .54, rect.height * .48);
     setState("smashing");
+    updateMobileSmash();
     root.classList.add("is-striking");
     status.textContent = `正在敲碎${WORKFLOW_SCENES[activeScene].label}的传统流程。`;
 
-    if (reducedMotion.matches) {
+    if (reducedMotion.matches || mobileViewport()) {
       root.classList.add("is-breaking");
-      finishTimer = window.setTimeout(finalizeReveal, 280);
+      finishTimer = window.setTimeout(finalizeReveal, mobileViewport() ? 680 : 280);
       return;
     }
     breakTimer = window.setTimeout(() => {
@@ -1184,13 +1238,16 @@ function setupWorkflowMap() {
     root.setAttribute("aria-label", `点击敲碎${WORKFLOW_SCENES[activeScene].label}的传统流程，查看 AI 辅助流程`);
     status.textContent = `当前展示${WORKFLOW_SCENES[activeScene].label}的传统流程。`;
     updateWorkflowChrome();
-    resetTimer = window.setTimeout(() => setState("idle"), reducedMotion.matches ? 1 : 240);
+    resetTimer = window.setTimeout(() => {
+      setState("idle");
+      updateMobileSmash();
+    }, reducedMotion.matches ? 1 : 240);
     root.focus({ preventScroll: true });
   };
 
   const playHint = () => {
     const activeState = sceneStates[activeScene];
-    if (reducedMotion.matches || activeState.hinted || activeState.revealed || !sectionVisible || state !== "idle") return;
+    if (mobileViewport() || reducedMotion.matches || activeState.hinted || activeState.revealed || !sectionVisible || state !== "idle") return;
     activeState.hinted = true;
     hintStartTimer = window.setTimeout(() => {
       if (!sectionVisible || sceneStates[activeScene].revealed || state !== "idle") return;
@@ -1208,6 +1265,7 @@ function setupWorkflowMap() {
     shardLayer.innerHTML = "";
     root.classList.remove("is-striking", "is-breaking", "is-building");
     setScenePresentation(sceneKey, true, options);
+    if (mobileViewport()) root.scrollTo({ left: 0, behavior: reducedMotion.matches ? "auto" : "smooth" });
     root.focus({ preventScroll: true });
     return true;
   };
@@ -1237,6 +1295,7 @@ function setupWorkflowMap() {
       const sceneKey = tab.dataset.workflowScene;
       if (sceneKey === activeScene) return;
       switchScene(sceneKey);
+      if (mobileViewport()) tab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
     });
     tab.addEventListener("keydown", (event) => {
       if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
@@ -1247,6 +1306,7 @@ function setupWorkflowMap() {
   });
 
   root.addEventListener("pointerenter", (event) => {
+    if (mobileViewport()) return;
     if (!["idle", "hinting"].includes(state)) return;
     sceneStates[activeScene].hinted = true;
     clearHint();
@@ -1254,13 +1314,14 @@ function setupWorkflowMap() {
     setState("hover");
   });
   root.addEventListener("pointermove", (event) => {
+    if (mobileViewport()) return;
     if (!["idle", "hover", "hinting"].includes(state)) return;
     sceneStates[activeScene].hinted = true;
     clearHint();
     setPointerPosition(event.clientX, event.clientY);
     setState("hover");
   });
-  root.addEventListener("pointerleave", () => state === "hover" && setState("idle"));
+  root.addEventListener("pointerleave", () => !mobileViewport() && state === "hover" && setState("idle"));
   root.addEventListener("focus", () => {
     if (state !== "idle") return;
     sceneStates[activeScene].hinted = true;
@@ -1270,7 +1331,9 @@ function setupWorkflowMap() {
     setState("hover");
   });
   root.addEventListener("blur", () => state === "hover" && setState("idle"));
-  root.addEventListener("click", revealAiFlow);
+  root.addEventListener("click", (event) => {
+    if (!mobileViewport()) revealAiFlow(event);
+  });
   root.addEventListener("keydown", (event) => {
     if (!["Enter", " ", "ArrowLeft", "ArrowRight"].includes(event.key)) return;
     event.preventDefault();
@@ -1286,6 +1349,7 @@ function setupWorkflowMap() {
     else revealAiFlow();
   });
   resetButton.addEventListener("click", resetFlow);
+  mobileSmashButton.addEventListener("click", () => revealAiFlow());
   nextButton.addEventListener("click", goToNextScene);
 
   if ("IntersectionObserver" in window) {
@@ -1309,10 +1373,10 @@ function setupWorkflowMap() {
 
 function projectTemplate(project, index) {
   return `
-    <button class="project-folder-card project-folder-card--${project.icon}" type="button" data-project="${index}" aria-label="打开项目档案：${project.name}">
+    <button class="project-folder-card project-folder-card--${project.icon} ${index === 0 ? "is-featured" : ""}" type="button" data-project="${index}" aria-expanded="false" aria-label="打开项目档案：${project.name}">
       <span class="project-folder-sheet" aria-hidden="true"></span>
       <span class="project-folder-tab-row">
-        <span class="project-folder-tab">PROJECT ${project.number}</span>
+        <span class="project-folder-tab">CASE FILE ${project.number}</span>
         <span class="project-folder-type">${project.type}</span>
       </span>
       <span class="project-card-icon project-card-icon--${project.icon}" aria-hidden="true"><i></i><b></b></span>
@@ -1320,11 +1384,11 @@ function projectTemplate(project, index) {
         <strong>${project.name}</strong>
         <small>${project.subtitle}</small>
       </span>
-      <span class="project-folder-summary">${project.summary}</span>
+      <span class="project-mobile-summary">${project.summary}</span>
+      <span class="project-case-proof project-case-problem"><b>解决的问题</b><em>${project.problem}</em></span>
+      <span class="project-case-proof project-case-action"><b>我的关键动作</b><em>${project.keyAction}</em></span>
+      <span class="project-case-proof project-case-result"><b>结果 / 沉淀</b><em>${project.archiveResult}</em></span>
       <span class="project-folder-tags">${project.tags.map((tag) => `<i>${tag}</i>`).join("")}</span>
-      <span class="project-card-metrics">
-        ${project.metrics.map(([value, label]) => `<i><strong>${value}</strong><small>${label}</small></i>`).join("")}
-      </span>
       <span class="project-open-hint">打开档案 →</span>
     </button>
   `;
@@ -1540,6 +1604,22 @@ function setupProjects() {
   grid.addEventListener("click", (event) => {
     const card = event.target.closest("[data-project]");
     if (!card) return;
+    if (mobileViewport()) {
+      const shouldOpen = !card.classList.contains("is-mobile-expanded");
+      grid.querySelectorAll(".project-folder-card").forEach((candidate) => {
+        candidate.classList.remove("is-mobile-expanded");
+        candidate.setAttribute("aria-expanded", "false");
+        const hint = candidate.querySelector(".project-open-hint");
+        if (hint) hint.textContent = "打开档案 →";
+      });
+      if (shouldOpen) {
+        card.classList.add("is-mobile-expanded");
+        card.setAttribute("aria-expanded", "true");
+        const hint = card.querySelector(".project-open-hint");
+        if (hint) hint.textContent = "收起档案 ↑";
+      }
+      return;
+    }
     const projectIndex = Number(card.dataset.project);
     const project = data.projects[projectIndex];
     activeProjectTrigger = card;
@@ -1595,7 +1675,7 @@ function setupMbti() {
   const wrongHints = [
     "再看看：首页和 AI 工作流里有线索。",
     "她更像会拆流程、定计划、推落地的人。",
-    "猫都看不下去了：答案很接近 ENTJ。",
+    "猫咪提示：再看看她处理复杂流程时的习惯。",
   ];
   const picker = $("#mbtiLetters");
   const submit = $("#mbtiSubmit");
@@ -1606,22 +1686,28 @@ function setupMbti() {
   const close = $("#mbtiClose");
   let wrongCount = 0;
 
-  function render() {
+  function render(changedIndex = -1) {
     picker.innerHTML = groups
       .map(
-        (group, index) => `
+        (group, index) => {
+          const selected = state[index] !== "?";
+          const dimension = group.join(" / ");
+          return `
           <button
-            class="mbti-letter ${state[index] !== "?" ? "is-selected" : ""}"
+            class="mbti-letter ${selected ? "is-selected" : ""} ${changedIndex === index ? "is-changing" : ""}"
             type="button"
             data-index="${index}"
-            aria-label="选择 ${group.join(" 或 ")}"
+            aria-label="${selected ? `${dimension}，当前选择 ${state[index]}，再次点击切换` : `${dimension}，点击选择`}"
           >
-            <span class="mbti-choice ${state[index] === group[0] ? "is-active" : ""}">${group[0]}</span>
-            <span class="mbti-divider">/</span>
-            <span class="mbti-choice ${state[index] === group[1] ? "is-active" : ""}">${group[1]}</span>
-            <small>${state[index] === "?" ? "点击选择" : "再点切换"}</small>
+            <span class="mbti-card-face">
+              <span class="mbti-placeholder">${dimension}</span>
+              <strong class="mbti-selected-letter" aria-hidden="true">${selected ? state[index] : ""}</strong>
+              <small class="mbti-dimension">${dimension}</small>
+              <span class="mbti-card-dots" aria-hidden="true"></span>
+            </span>
           </button>
-        `
+        `;
+        }
       )
       .join("");
     submit.disabled = state.includes("?");
@@ -1636,7 +1722,10 @@ function setupMbti() {
     state[index] = state[index] === first ? second : first;
     feedback.textContent = "";
     feedback.className = "mbti-feedback";
-    render();
+    render(index);
+    window.requestAnimationFrame(() => {
+      picker.querySelector(`[data-index="${index}"]`)?.focus({ preventScroll: true });
+    });
   });
 
   $("#mbtiOpen").addEventListener("click", () => {
@@ -1751,6 +1840,59 @@ function setupDrag() {
   doll.addEventListener("lostpointercapture", stopDrag);
 }
 
+function setupContactCopy() {
+  const contact = $("#contact");
+  const toast = $("#contactToast");
+  if (!contact || !toast) return;
+  let toastTimer = 0;
+
+  const copyText = async (value) => {
+    if (navigator.clipboard?.writeText) {
+      const copiedWithClipboard = await Promise.race([
+        navigator.clipboard.writeText(value).then(() => true).catch(() => false),
+        new Promise((resolve) => window.setTimeout(() => resolve(false), 500)),
+      ]);
+      if (copiedWithClipboard) return true;
+    }
+
+    const textarea = document.createElement("textarea");
+    textarea.value = value;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, value.length);
+    let copied = false;
+    try {
+      copied = document.execCommand("copy");
+    } catch (error) {
+      copied = false;
+    }
+    textarea.remove();
+    return copied;
+  };
+
+  const showToast = (message, success) => {
+    window.clearTimeout(toastTimer);
+    toast.textContent = message;
+    toast.classList.toggle("is-error", !success);
+    toast.classList.add("is-visible");
+    toastTimer = window.setTimeout(() => toast.classList.remove("is-visible"), 1800);
+  };
+
+  contact.querySelectorAll("[data-copy-value]").forEach((card) => {
+    card.addEventListener("click", async () => {
+      const copied = await copyText(card.dataset.copyValue);
+      card.classList.toggle("is-copied", copied);
+      showToast(copied ? card.dataset.copySuccess : "复制失败，请手动复制", copied);
+      card.focus({ preventScroll: true });
+      window.setTimeout(() => card.classList.remove("is-copied"), 620);
+    });
+  });
+}
+
 function setupNav() {
   const links = [...document.querySelectorAll(".nav-item")];
   const sections = links.map((link) => document.getElementById(link.dataset.nav));
@@ -1780,7 +1922,7 @@ function setupParticles() {
   let dpr = 1;
 
   function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    dpr = Math.min(window.devicePixelRatio || 1, mobileViewport() ? 1.35 : 2);
     const rect = canvas.getBoundingClientRect();
     canvas.width = Math.max(1, Math.floor(rect.width * dpr));
     canvas.height = Math.max(1, Math.floor(rect.height * dpr));
@@ -1793,15 +1935,22 @@ function setupParticles() {
     ctx.fillStyle = "#0757f7";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    const maxWidth = width * 0.94;
-    let fontSize = Math.max(54, Math.min(126, width / 8.7));
+    const isMobile = mobileViewport();
+    const maxWidth = width * (isMobile ? 0.88 : 0.94);
+    const lines = isMobile ? ["欢迎进入", "DingCat OS"] : [text];
+    let fontSize = isMobile ? Math.max(46, Math.min(62, width / 5.2)) : Math.max(54, Math.min(126, width / 8.7));
     do {
       ctx.font = `900 ${fontSize}px "Trebuchet MS", Arial`;
       fontSize -= 2;
-    } while (ctx.measureText(text).width > maxWidth && fontSize > 44);
-    ctx.fillText(text, width / 2, height / 2);
+    } while (Math.max(...lines.map((line) => ctx.measureText(line).width)) > maxWidth && fontSize > 40);
+    ctx.font = `900 ${fontSize}px "Trebuchet MS", Arial`;
+    const lineHeight = fontSize * 1.16;
+    lines.forEach((line, index) => {
+      const y = height / 2 + (index - (lines.length - 1) / 2) * lineHeight;
+      ctx.fillText(line, width / 2, y);
+    });
     const image = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const gap = window.matchMedia("(max-width: 760px)").matches ? 10 : 6;
+    const gap = mobileViewport() ? 14 : 6;
     particles = [];
     for (let y = 0; y < canvas.height; y += gap * dpr) {
       for (let x = 0; x < canvas.width; x += gap * dpr) {
@@ -1821,7 +1970,7 @@ function setupParticles() {
       const dx = particle.x - pointer.x;
       const dy = particle.y - pointer.y;
       const dist = Math.hypot(dx, dy);
-      if (dist < 84) {
+      if (!mobileViewport() && dist < 84) {
         const force = (84 - dist) / 84;
         particle.vx += (dx / (dist || 1)) * force * 2.15;
         particle.vy += (dy / (dist || 1)) * force * 2.15;
@@ -1833,7 +1982,7 @@ function setupParticles() {
       particle.x += particle.vx;
       particle.y += particle.vy;
       ctx.beginPath();
-      ctx.arc(particle.x, particle.y, window.matchMedia("(max-width: 760px)").matches ? 2 : 2.35, 0, Math.PI * 2);
+      ctx.arc(particle.x, particle.y, mobileViewport() ? 1.9 : 2.35, 0, Math.PI * 2);
       ctx.fill();
     });
     requestAnimationFrame(draw);
@@ -1865,5 +2014,6 @@ setupProjects();
 setupMbti();
 setupCat();
 setupDrag();
+setupContactCopy();
 setupNav();
 setupParticles();
